@@ -1,0 +1,63 @@
+.fill-button {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 9999px;
+  background: transparent;
+  font-family: inherit;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: border-color 300ms;
+}
+
+.fill-button.is-filled {
+  border-color: transparent;
+}
+
+.fill-button:not(.is-filled):hover {
+  border-color: transparent;
+}
+
+.fill-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #000, 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.fill-button--sm {
+  padding: 0.5rem 1rem;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.fill-button--md {
+  padding: 0.75rem 1.5rem;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@media (min-width: 1024px) {
+  .fill-button--md {
+    padding: 15px 2rem;
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.fill-button__fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 9999px;
+}
+
+.fill-button__label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
