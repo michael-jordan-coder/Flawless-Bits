@@ -4,6 +4,7 @@ import { CodeTab, PreviewTab, TabsLayout } from '../../components/common/TabsLay
 import Customize from '../../components/common/Preview/Customize';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 import CodeExample from '../../components/code/CodeExample';
 import RefreshButton from '../../components/common/Preview/RefreshButton';
 import PropTable from '../../components/common/Preview/PropTable';
@@ -20,13 +21,32 @@ const DEFAULT_PROPS = {
   defaultWidth: 240,
   minWidth: 200,
   maxWidth: 380,
-  brand: 'Acme'
+  brand: 'Acme',
+  accentColor: '#a855f7',
+  surfaceColor: '#15121c'
 };
+
+const ACCENT_OPTIONS = [
+  { label: 'Purple', value: '#a855f7' },
+  { label: 'Cyan', value: '#06b6d4' },
+  { label: 'Amber', value: '#f59e0b' },
+  { label: 'Mint', value: '#3ccb91' },
+  { label: 'Coral', value: '#f43f5e' },
+  { label: 'Ink', value: '#52525b' }
+];
+
+const SURFACE_OPTIONS = [
+  { label: 'Plum', value: '#15121c' },
+  { label: 'Carbon', value: '#0f0f12' },
+  { label: 'Slate', value: '#161b22' },
+  { label: 'Espresso', value: '#1a130f' },
+  { label: 'Paper', value: '#1d1b18' }
+];
 
 const SidebarDemo = () => {
   const [key, forceRerender] = useForceRerender();
   const { props, updateProp, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-  const { defaultCollapsed, defaultWidth, minWidth, maxWidth, brand } = props;
+  const { defaultCollapsed, defaultWidth, minWidth, maxWidth, brand, accentColor, surfaceColor } = props;
 
   const propData = useMemo(
     () => [
@@ -65,6 +85,18 @@ const SidebarDemo = () => {
         type: 'number',
         default: '380',
         description: 'Maximum width allowed during resize.'
+      },
+      {
+        name: 'accentColor',
+        type: 'string',
+        default: "'#a855f7'",
+        description: 'Drives the brand mark, badge, active item tint, focus rings, and resize handle line.'
+      },
+      {
+        name: 'surfaceColor',
+        type: 'string',
+        default: "'#15121c'",
+        description: 'Sidebar background. Hover and active states are mixed from accent and surface.'
       },
       {
         name: 'activeId',
@@ -118,11 +150,33 @@ const SidebarDemo = () => {
               defaultWidth={defaultWidth}
               minWidth={minWidth}
               maxWidth={maxWidth}
+              accentColor={accentColor}
+              surfaceColor={surfaceColor}
             />
             <RefreshButton onClick={forceRerender} />
           </Flex>
 
           <Customize>
+            <PreviewSelect
+              title="Accent color"
+              name="sidebar-accent"
+              value={accentColor}
+              options={ACCENT_OPTIONS}
+              onChange={val => {
+                updateProp('accentColor', val);
+                forceRerender();
+              }}
+            />
+            <PreviewSelect
+              title="Surface"
+              name="sidebar-surface"
+              value={surfaceColor}
+              options={SURFACE_OPTIONS}
+              onChange={val => {
+                updateProp('surfaceColor', val);
+                forceRerender();
+              }}
+            />
             <PreviewSwitch
               title="Start collapsed"
               isChecked={defaultCollapsed}

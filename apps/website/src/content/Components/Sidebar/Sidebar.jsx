@@ -32,6 +32,8 @@ export default function Sidebar({
   defaultWidth = 240,
   minWidth = 200,
   maxWidth = 380,
+  accentColor = '#a855f7',
+  surfaceColor = '#15121c',
   activeId: activeIdProp,
   onItemClick,
   onCollapsedChange,
@@ -93,18 +95,22 @@ export default function Sidebar({
   return (
     <aside
       ref={rootRef}
-      className={join('sidebar', collapsed && 'sidebar--collapsed', isResizing && 'sidebar--resizing', className)}
-      style={{ width: collapsed ? COLLAPSED_WIDTH : width }}
+      className={join('ui-sidebar', collapsed && 'ui-sidebar--collapsed', isResizing && 'ui-sidebar--resizing', className)}
+      style={{
+        width: collapsed ? COLLAPSED_WIDTH : width,
+        '--ui-sidebar-accent': accentColor,
+        '--ui-sidebar-surface': surfaceColor
+      }}
       aria-label="Sidebar navigation"
     >
-      <div className="sidebar__brand">
-        <div className="sidebar__brand-mark" aria-hidden="true">
+      <div className="ui-sidebar__brand">
+        <div className="ui-sidebar__brand-mark" aria-hidden="true">
           {brand.charAt(0).toUpperCase()}
         </div>
-        {!collapsed && <span className="sidebar__brand-name">{brand}</span>}
+        {!collapsed && <span className="ui-sidebar__brand-name">{brand}</span>}
       </div>
 
-      <nav className="sidebar__nav">
+      <nav className="ui-sidebar__nav">
         {items.map(item => {
           const Icon = item.icon;
           const isActive = item.id === activeId;
@@ -112,16 +118,16 @@ export default function Sidebar({
             <button
               key={item.id}
               type="button"
-              className={join('sidebar__item', isActive && 'sidebar__item--active')}
+              className={join('ui-sidebar__item', isActive && 'ui-sidebar__item--active')}
               onClick={() => handleItemClick(item.id)}
               aria-current={isActive ? 'page' : undefined}
               title={collapsed ? item.label : undefined}
             >
-              <Icon size={18} strokeWidth={1.75} className="sidebar__item-icon" />
+              <Icon size={18} strokeWidth={1.75} className="ui-sidebar__item-icon" />
               {!collapsed && (
                 <>
-                  <span className="sidebar__item-label">{item.label}</span>
-                  {item.badge != null && <span className="sidebar__item-badge">{item.badge}</span>}
+                  <span className="ui-sidebar__item-label">{item.label}</span>
+                  {item.badge != null && <span className="ui-sidebar__item-badge">{item.badge}</span>}
                 </>
               )}
             </button>
@@ -131,7 +137,7 @@ export default function Sidebar({
 
       <button
         type="button"
-        className="sidebar__collapse"
+        className="ui-sidebar__collapse"
         onClick={toggleCollapsed}
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
@@ -140,7 +146,7 @@ export default function Sidebar({
 
       {!collapsed && (
         <div
-          className="sidebar__handle"
+          className="ui-sidebar__handle"
           onPointerDown={startResize}
           role="separator"
           aria-orientation="vertical"

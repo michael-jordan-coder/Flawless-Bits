@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ComponentType, type PointerEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type ComponentType, type CSSProperties, type PointerEvent } from 'react';
 import {
   Home,
   Inbox,
@@ -28,6 +28,8 @@ export interface SidebarProps {
   defaultWidth?: number;
   minWidth?: number;
   maxWidth?: number;
+  accentColor?: string;
+  surfaceColor?: string;
   activeId?: string;
   onItemClick?: (id: string) => void;
   onCollapsedChange?: (collapsed: boolean) => void;
@@ -52,6 +54,8 @@ export default function Sidebar({
   defaultWidth = 240,
   minWidth = 200,
   maxWidth = 380,
+  accentColor = '#a855f7',
+  surfaceColor = '#15121c',
   activeId: activeIdProp,
   onItemClick,
   onCollapsedChange,
@@ -110,21 +114,30 @@ export default function Sidebar({
     [collapsed, maxWidth, minWidth, width]
   );
 
+  const rootStyle: CSSProperties = {
+    width: collapsed ? COLLAPSED_WIDTH : width,
+    ['--ui-sidebar-accent' as string]: accentColor,
+    ['--ui-sidebar-surface' as string]: surfaceColor,
+    ['--ui-sidebar-border' as string]: `color-mix(in oklch, ${accentColor} 14%, #1a1a1a)`,
+    ['--ui-sidebar-hover' as string]: `color-mix(in oklch, ${accentColor} 12%, ${surfaceColor})`,
+    ['--ui-sidebar-active' as string]: `color-mix(in oklch, ${accentColor} 22%, ${surfaceColor})`
+  };
+
   return (
     <aside
       ref={rootRef}
       className={twMerge(
-        'relative box-border flex h-full min-h-[480px] flex-col bg-[#15121c] text-white border-r border-[#2f293a] transition-[width] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none',
+        'relative box-border flex h-full min-h-[480px] flex-col text-white bg-[var(--ui-sidebar-surface)] border-r border-[var(--ui-sidebar-border)] transition-[width] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none',
         collapsed ? 'px-2 pt-4 pb-3' : 'px-2.5 pt-4 pb-3',
         isResizing && 'transition-none',
         className
       )}
-      style={{ width: collapsed ? COLLAPSED_WIDTH : width }}
+      style={rootStyle}
       aria-label="Sidebar navigation"
     >
       <div className="flex min-h-[40px] items-center gap-2.5 px-1.5 pt-1 pb-[18px]">
         <div
-          className="flex h-7 w-7 flex-none items-center justify-center rounded-[7px] bg-[#a855f7] text-[13px] font-semibold text-white"
+          className="flex h-7 w-7 flex-none items-center justify-center rounded-[7px] bg-[var(--ui-sidebar-accent)] text-[13px] font-semibold text-white"
           aria-hidden="true"
         >
           {brand.charAt(0).toUpperCase()}
@@ -143,9 +156,9 @@ export default function Sidebar({
               key={item.id}
               type="button"
               className={twMerge(
-                'flex w-full cursor-pointer items-center gap-3 rounded-lg border-0 bg-transparent px-2.5 py-2 text-left text-[13.5px] text-[#c9c6cf] transition-colors duration-100 ease-out hover:bg-[#1f1a2a] hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-[1px] focus-visible:outline-[#a855f7] motion-reduce:transition-none',
+                'flex w-full cursor-pointer items-center gap-3 rounded-lg border-0 bg-transparent px-2.5 py-2 text-left text-[13.5px] text-[#c9c6cf] transition-colors duration-100 ease-out hover:bg-[var(--ui-sidebar-hover)] hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-[1px] focus-visible:outline-[var(--ui-sidebar-accent)] motion-reduce:transition-none',
                 collapsed && 'justify-center gap-0 px-2.5 py-2.5',
-                isActive && 'bg-[#2a2236] text-white'
+                isActive && 'bg-[var(--ui-sidebar-active)] text-white'
               )}
               onClick={() => handleItemClick(item.id)}
               aria-current={isActive ? 'page' : undefined}
@@ -156,7 +169,7 @@ export default function Sidebar({
                 <>
                   <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">{item.label}</span>
                   {item.badge != null && (
-                    <span className="flex-none rounded-full bg-[#a855f7] px-[7px] py-[2px] text-[11px] font-semibold leading-[1.4] text-white">
+                    <span className="flex-none rounded-full bg-[var(--ui-sidebar-accent)] px-[7px] py-[2px] text-[11px] font-semibold leading-[1.4] text-white">
                       {item.badge}
                     </span>
                   )}
@@ -170,7 +183,7 @@ export default function Sidebar({
       <button
         type="button"
         className={twMerge(
-          'mt-3 inline-flex h-7 w-7 cursor-pointer items-center justify-center self-end rounded-lg border border-[#2f293a] bg-transparent text-[#c9c6cf] transition-colors duration-100 ease-out hover:bg-[#1f1a2a] hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-[1px] focus-visible:outline-[#a855f7] motion-reduce:transition-none',
+          'mt-3 inline-flex h-7 w-7 cursor-pointer items-center justify-center self-end rounded-lg border border-[var(--ui-sidebar-border)] bg-transparent text-[#c9c6cf] transition-colors duration-100 ease-out hover:bg-[var(--ui-sidebar-hover)] hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-[1px] focus-visible:outline-[var(--ui-sidebar-accent)] motion-reduce:transition-none',
           collapsed && 'self-center'
         )}
         onClick={toggleCollapsed}
@@ -182,8 +195,8 @@ export default function Sidebar({
       {!collapsed && (
         <div
           className={twMerge(
-            "absolute -right-1 top-0 h-full w-2 cursor-ew-resize touch-none bg-transparent before:absolute before:left-[3px] before:top-0 before:h-full before:w-px before:bg-transparent before:transition-colors before:duration-150 before:content-[''] hover:before:bg-[#a855f7] motion-reduce:before:transition-none",
-            isResizing && 'before:bg-[#a855f7]'
+            "absolute -right-1 top-0 h-full w-2 cursor-ew-resize touch-none bg-transparent before:absolute before:left-[3px] before:top-0 before:h-full before:w-px before:bg-transparent before:transition-colors before:duration-150 before:content-[''] hover:before:bg-[var(--ui-sidebar-accent)] motion-reduce:before:transition-none",
+            isResizing && 'before:bg-[var(--ui-sidebar-accent)]'
           )}
           onPointerDown={startResize}
           role="separator"
