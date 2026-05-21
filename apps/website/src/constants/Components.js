@@ -1,7 +1,5 @@
 const getStarted = {
-  introduction: () => import('../docs/Introduction.jsx'),
-  installation: () => import('../docs/Installation.jsx'),
-  mcp: () => import('../docs/McpServer.jsx')
+  introduction: () => import('../docs/Introduction.jsx')
 };
 
 const components = {
