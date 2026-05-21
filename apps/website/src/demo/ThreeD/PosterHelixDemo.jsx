@@ -88,7 +88,7 @@ const PosterHelixDemo = () => {
     showAxis,
     showCounter,
     showHint,
-    accentColor: 'var(--primary)'
+    accentColor: 'var(--accent)'
   };
 
   return (

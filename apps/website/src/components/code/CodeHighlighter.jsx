@@ -32,8 +32,8 @@ const CodeHighlighter = ({ language, codeString, showLineNumbers = true }) => {
         className="code-highlighter"
         customStyle={{
           margin: 0,
-          background: colors.bgCard,
-          border: `1px solid ${colors.borderPrimary}`,
+          background: 'var(--surface-neutral)',
+          border: '1px solid var(--surface-neutral-border)',
           padding: '1em'
         }}
       >
@@ -45,11 +45,11 @@ const CodeHighlighter = ({ language, codeString, showLineNumbers = true }) => {
         top="0.65em"
         right="0.6em"
         size="sm"
-        bg={copied ? colors.primary : colors.bgBody}
+        bg={copied ? colors.accent : 'var(--surface-neutral)'}
         color={copied ? 'black' : 'white'}
         borderRadius="10px"
-        border={`1px solid ${colors.borderSecondary}`}
-        _hover={{ bg: copied ? colors.primary : colors.bgElevated }}
+        border="1px solid var(--surface-neutral-border)"
+        _hover={{ bg: copied ? colors.accent : 'var(--surface-neutral-elevated)' }}
         onClick={handleCopy}
         aria-label={copied ? 'Copied' : 'Copy code'}
       >

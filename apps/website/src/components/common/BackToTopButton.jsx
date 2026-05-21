@@ -25,8 +25,8 @@ const BackToTopButton = () => {
       bottom={visible ? { base: '6em', md: '2.5em' } : '1em'}
       cursor={visible ? 'pointer' : 'default'}
       onClick={() => visible && window.scrollTo({ top: 0, behavior: 'smooth' })}
-      bg="#1B1722"
-      border="1px solid #2F293A"
+      bg="var(--bg-card)"
+      border="1px solid var(--border-primary)"
     >
       <Icon as={FiArrowUp} color="#fff" boxSize={4} />
     </Button>

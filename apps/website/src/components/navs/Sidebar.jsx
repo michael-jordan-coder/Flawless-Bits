@@ -41,7 +41,7 @@ const Category = memo(({ category, location, handleNavigation, isTransitioning, 
       <Text className="category-name" mb={2} mt={isFirstCategory ? 0 : 4}>
         {category.name}
       </Text>
-      <Stack spacing={0.5} pl={4} borderLeft="1px solid #2F293A" position="relative">
+      <Stack spacing={0.5} pl={4} borderLeft="1px solid var(--border-primary)" position="relative">
         {items.map(({ sub, path, isActive, isNew, isUpdated }) => (
           <Link
             key={path}

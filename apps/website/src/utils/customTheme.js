@@ -4,9 +4,9 @@ export const toastStyles = {
   style: {
     fontSize: '12px',
     borderRadius: '0.75rem',
-    border: '1px solid #2F293A',
+    border: '1px solid var(--border-primary)',
     color: '#fff',
-    backgroundColor: '#120F17',
+    backgroundColor: 'var(--bg-body)',
     textAlign: 'center'
   }
 };
