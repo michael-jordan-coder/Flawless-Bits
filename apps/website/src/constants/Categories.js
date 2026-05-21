@@ -8,7 +8,9 @@ export const CATEGORIES = [
   },
   {
     name: 'Components',
-    subcategories: ['Fill Button']
+    subcategories: ['Fill Button',
+      'Sidebar'
+    ]
   },
   {
     name: '3D',

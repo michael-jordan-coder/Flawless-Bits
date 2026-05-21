@@ -46,5 +46,12 @@ export const componentMetadata = {
     category: 'ThreeD',
     name: 'PosterHelix',
     tags: ['3d', 'helix', 'spiral', 'cinema', 'drag', 'css-3d']
+  },
+  'Components/Sidebar': {
+    description:
+      'A polished dashboard sidebar with icon-only collapse, drag-to-resize handle, and keyboard-accessible nav items.',
+    category: 'Components',
+    name: 'Sidebar',
+    tags: ['navigation', 'sidebar', 'layout', 'collapsible', 'resizable']
   }
 };

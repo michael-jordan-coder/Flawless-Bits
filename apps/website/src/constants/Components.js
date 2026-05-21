@@ -8,7 +8,8 @@ const components = {
   'fill-button': () => import('../demo/Components/FillButtonDemo'),
   'honeycomb-grid': () => import('../demo/Scroll/HoneycombGridDemo'),
   'poster-drum': () => import('../demo/ThreeD/PosterDrumDemo'),
-  'poster-helix': () => import('../demo/ThreeD/PosterHelixDemo')
+  'poster-helix': () => import('../demo/ThreeD/PosterHelixDemo'),
+  'sidebar': () => import('../demo/Components/SidebarDemo')
 };
 
 export const componentMap = {
