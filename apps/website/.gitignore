@@ -4,3 +4,6 @@ dist
 *.log
 .vite
 public/r
+.env
+.env.local
+.env.*.local
