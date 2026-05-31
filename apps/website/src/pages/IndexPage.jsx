@@ -3,7 +3,7 @@ import { showcaseItems } from '../constants/showcaseItems';
 import ComponentCard from '../components/common/ComponentCard';
 import BackToTopButton from '../components/common/BackToTopButton';
 
-const CATEGORY_ORDER = ['Components', '3D', 'Scroll'];
+const CATEGORY_ORDER = ['Components', '3D', 'Scroll', 'Text Animations', 'Backgrounds'];
 
 const IndexPage = () => {
   const sections = useMemo(() => {

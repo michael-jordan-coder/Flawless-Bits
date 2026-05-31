@@ -1,0 +1,33 @@
+.scramble-text {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fafafa;
+  white-space: pre;
+  cursor: default;
+  outline: none;
+}
+
+.scramble-text:focus-visible {
+  outline: 1px solid #fafafa;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.scramble-text-visible {
+  display: inline-block;
+}
+
+.scramble-text-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

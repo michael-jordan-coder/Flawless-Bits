@@ -4,6 +4,8 @@ import HoneycombGrid from '../content/Scroll/HoneycombGrid/HoneycombGrid';
 import FillButton from '../content/Components/FillButton/FillButton';
 import Dropdown from '../content/Components/Dropdown/Dropdown';
 import Sidebar from '../content/Components/Sidebar/Sidebar';
+import ScrambleText from '../content/TextAnimations/ScrambleText/ScrambleText';
+import DotGrid from '../content/Backgrounds/DotGrid/DotGrid';
 
 const HELIX_POSTERS = [
   { id: 'p01', image: 'https://picsum.photos/seed/aurora/360/480', title: 'Aurora Drift' },
@@ -92,6 +94,30 @@ export const showcaseItems = [
     render: () => (
       <div className="component-card-sidebar">
         <Sidebar defaultWidth={232} />
+      </div>
+    )
+  },
+  {
+    key: 'scramble-text',
+    name: 'Scramble Text',
+    category: 'Text Animations',
+    route: '/text-animations/scramble-text',
+    tags: ['text', 'glyph', 'hover'],
+    render: () => (
+      <div className="component-card-center">
+        <ScrambleText text="ui bits" trigger="view" duration={1100} />
+      </div>
+    )
+  },
+  {
+    key: 'dot-grid',
+    name: 'Dot Grid',
+    category: 'Backgrounds',
+    route: '/backgrounds/dot-grid',
+    tags: ['canvas', 'cursor', 'grid'],
+    render: () => (
+      <div style={{ position: 'absolute', inset: 0 }}>
+        <DotGrid gap={28} dotSize={2} proximity={110} />
       </div>
     )
   }

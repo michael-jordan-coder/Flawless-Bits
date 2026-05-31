@@ -24,6 +24,8 @@ Then do the work. Don't ask permission to start — only ask if the category is 
 | Components | `/components/` | `Components` | `Components` | Buttons, interactive primitives |
 | 3D | `/3d/` | `ThreeD` | `ThreeD` | 3D scenes, cinematic showpieces |
 | Scroll | `/scroll/` | `Scroll` | `Scroll` | Drag- and scroll-driven interactions |
+| Text Animations | `/text-animations/` | `TextAnimations` | `TextAnimations` | Glyph/character text effects |
+| Backgrounds | `/backgrounds/` | `Backgrounds` | `Backgrounds` | Full-bleed canvas/ambient backdrops |
 
 **Two-name rule.** The folder name is the jsrepo lookup path — it MUST match the actual directory under `src/content/<Folder>/`, `src/tailwind/<Folder>/`, `src/ts-default/<Folder>/`, `src/ts-tailwind/<Folder>/`, and the `category` field in `src/constants/Information.js`. The Categories.js `name` is the sidebar display + URL slug; it can differ (e.g., folder `ThreeD`, display `'3D'`).
 
@@ -54,8 +56,34 @@ Then do the work. Don't ask permission to start — only ask if the category is 
 
 4. **Demo file** uses `DemoShell` (`src/components/common/Preview/DemoShell.jsx`). The shell owns `ComponentPropsProvider`, `TabsLayout`, `useComponentProps` + `useForceRerender`, the preview `<Flex>`, `FullscreenButton` + `RefreshButton`, `Customize`, `PropTable`, `Dependencies`, and `CodeExample`. The demo passes static props (`defaultProps`, `propData`, `dependencies`, `codeObject`, `componentName`, optional `flexProps`, `demoOnlyProps`, `computedProps`) and two render callbacks:
    - `preview={({ props, key }) => <Component key={key} {...props} />}` — caller applies `key` so refresh works. Use this to handle children-bearing components (`<Component>{props.label}</Component>`), sample data, or literal-string overrides.
-   - `controls={({ props, updateProp, forceRerender }) => <>...</>}` — Customize controls (`PreviewSlider` / `PreviewSwitch` / `PreviewSelect`). Rendered inside the shell's `<Customize>` which portals into the right shell panel.
-   Demo imports the component from `content/` (the JS+CSS variant). Reference: `src/demo/Components/SidebarDemo.jsx` (plain spread + `flexProps` override), `src/demo/Components/FillButtonDemo.jsx` (children-bearing + `demoOnlyProps`), `src/demo/ThreeD/PosterHelixDemo.jsx` (sample data + literal accent prop).
+   - `controls={({ props, updateProp, forceRerender }) => <>...</>}` — Customize controls, rendered inside the shell's `<Customize>` which portals into the right shell panel.
+   Demo imports the component from `content/` (the JS+CSS variant). Reference: `src/demo/Components/SidebarDemo.jsx` (plain spread + `flexProps` override), `src/demo/Components/FillButtonDemo.jsx` (children-bearing + `demoOnlyProps`), `src/demo/ThreeD/PosterHelixDemo.jsx` (sample data + literal accent prop), `src/demo/Components/DropdownDemo.jsx` (selects + switch).
+
+   **Always ship real Customize controls — the scaffolder emits an empty `controls` stub, and an empty right panel is a bug, not a finished demo.** Import the control primitives explicitly from `src/components/common/Preview/`:
+   ```jsx
+   import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+   import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
+   import PreviewSelect from '../../components/common/Preview/PreviewSelect';
+   ```
+   Wire one control per meaningful prop, and use the established `set` helper so rAF/canvas/observer components re-init on change:
+   ```jsx
+   controls={({ props, updateProp, forceRerender }) => {
+     const set = (name, val) => { updateProp(name, val); forceRerender(); };
+     return (
+       <>
+         <PreviewSlider title="Gap" min={16} max={64} value={props.gap} valueUnit="px" onChange={v => set('gap', v)} />
+         <PreviewSwitch title="Grain" isChecked={props.showGrain} onChange={v => set('showGrain', v)} />
+         <PreviewSelect title="Trigger" options={[{ value: 'hover', label: 'On hover' }, { value: 'view', label: 'In view' }]} value={props.trigger} onChange={v => set('trigger', v)} />
+       </>
+     );
+   }}
+   ```
+   Control-API gotchas (read the source if unsure — `PreviewSlider.jsx`, `PreviewSwitch.jsx`, `PreviewSelect.jsx`):
+   - `PreviewSlider`: `{ title, min, max, step?, value, valueUnit?, onChange }`. **`displayValue` is a FUNCTION** (`displayValue(value)`), not a string — for a plain unit suffix use `valueUnit="px"`, never `displayValue={`${x}px`}` (that throws).
+   - `PreviewSwitch`: `{ title, isChecked, onChange }` — `onChange` receives the next boolean.
+   - `PreviewSelect`: `{ title, options, value, onChange }` — `options` is `[{ value, label }]`; `onChange` receives the chosen `value`.
+
+   **Full-bleed components (backgrounds, canvas, 3D scenes) must fill fullscreen.** Do NOT wrap them in a fixed-height `<div>` in the demo — that breaks the `FullscreenButton`. Make the component root `width:100%; height:100%` (drive its canvas with a `ResizeObserver`), then pass `flexProps={{ padding: 0, overflow: 'hidden' }}` and render it directly so it fills the preview Flex in both normal and fullscreen modes.
 
 5. **Update the Information.js description** — the scaffolder writes a placeholder like `"Foo component."`; replace with a real one-line description.
 
