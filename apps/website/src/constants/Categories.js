@@ -20,5 +20,15 @@ export const CATEGORIES = [
   {
     name: 'Scroll',
     subcategories: ['Honeycomb Grid']
+  },
+  {
+    name: 'Text Animations',
+    subcategories: ['Scramble Text']
+  },
+  {
+    name: 'Backgrounds',
+    subcategories: [
+      'Dot Grid'
+    ]
   }
 ];

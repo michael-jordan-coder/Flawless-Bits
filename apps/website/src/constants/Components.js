@@ -8,7 +8,9 @@ const components = {
   'poster-drum': () => import('../demo/ThreeD/PosterDrumDemo'),
   'poster-helix': () => import('../demo/ThreeD/PosterHelixDemo'),
   'sidebar': () => import('../demo/Components/SidebarDemo'),
-  'dropdown': () => import('../demo/Components/DropdownDemo')
+  'dropdown': () => import('../demo/Components/DropdownDemo'),
+  'scramble-text': () => import('../demo/TextAnimations/ScrambleTextDemo'),
+  'dot-grid': () => import('../demo/Backgrounds/DotGridDemo')
 };
 
 export const componentMap = {

@@ -60,5 +60,19 @@ export const componentMetadata = {
     category: 'Components',
     name: 'Dropdown',
     tags: ['form', 'select', 'dropdown', 'keyboard', 'accessible']
+  },
+  'TextAnimations/ScrambleText': {
+    description:
+      'Text that resolves from cycling glyphs into the final string — replays on hover/focus or runs once in view. Single rAF loop, reduced-motion-safe, with a screen-reader copy of the real text.',
+    category: 'TextAnimations',
+    name: 'ScrambleText',
+    tags: ['text', 'scramble', 'glyph', 'hover', 'decode']
+  },
+  'Backgrounds/DotGrid': {
+    description:
+      'Canvas dot field that brightens and swells toward the cursor, with a click shock-ripple. Single rAF loop, devicePixelRatio-aware, reduced-motion-safe.',
+    category: 'Backgrounds',
+    name: 'DotGrid',
+    tags: ['canvas', 'background', 'cursor', 'grid', 'interactive']
   }
 };

@@ -45,7 +45,8 @@
   grid-template-areas:
     'helix helix honey honey'
     'helix helix side  drop'
-    'drum  drum  fill  fill';
+    'scram scram drum  drum'
+    'dots  dots  fill  fill';
 }
 
 @media (max-width: 900px) {
@@ -57,6 +58,8 @@
       'honey honey'
       'drum  drum'
       'side  drop'
+      'scram scram'
+      'dots  dots'
       'fill  fill';
   }
 }
@@ -72,6 +75,8 @@
       'drum'
       'side'
       'drop'
+      'scram'
+      'dots'
       'fill';
   }
 }

@@ -13,7 +13,9 @@ const AREA_BY_KEY = {
   'poster-drum': 'drum',
   'fill-button': 'fill',
   dropdown: 'drop',
-  sidebar: 'side'
+  sidebar: 'side',
+  'scramble-text': 'scram',
+  'dot-grid': 'dots'
 };
 
 const Gallery = () => (
