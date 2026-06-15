@@ -33,7 +33,7 @@ export const CATEGORIES = [
   },
   {
     name: 'Text Animations',
-    subcategories: ['Scramble Text']
+    subcategories: ['Scramble Text', 'Number Ticker']
   },
   {
     name: 'Backgrounds',

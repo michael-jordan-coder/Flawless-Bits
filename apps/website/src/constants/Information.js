@@ -138,5 +138,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'StarRating',
     tags: ['rating', 'stars', 'input', 'motion', 'feedback']
+  },
+  'TextAnimations/NumberTicker': {
+    description:
+      'A number whose digits roll on vertical reels like a mechanical odometer whenever the value changes, with thousands grouping, decimals, and prefix/suffix, inspired by the rolling number transitions in the Family app.',
+    category: 'TextAnimations',
+    name: 'NumberTicker',
+    tags: ['number', 'counter', 'odometer', 'roll', 'motion']
   }
 };
