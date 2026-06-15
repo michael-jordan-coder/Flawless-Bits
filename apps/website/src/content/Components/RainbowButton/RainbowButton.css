@@ -1,0 +1,49 @@
+.rainbow-button {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.rainbow-button__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.rainbow-button__glow {
+  z-index: 0;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+.rainbow-button:hover .rainbow-button__glow {
+  opacity: 1;
+}
+
+.rainbow-button__ring {
+  z-index: 1;
+}
+
+.rainbow-button__face {
+  position: absolute;
+  z-index: 2;
+  background: #0a0a0a;
+}
+
+.rainbow-button__label {
+  position: relative;
+  z-index: 3;
+  padding: 0.8rem 1.8rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.rainbow-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #000, 0 0 0 4px rgba(255, 255, 255, 0.6);
+}

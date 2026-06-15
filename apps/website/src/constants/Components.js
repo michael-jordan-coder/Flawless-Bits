@@ -14,7 +14,10 @@ const components = {
   'pill-nav': () => import('../demo/Components/PillNavDemo'),
   'like-button': () => import('../demo/Components/LikeButtonDemo'),
   'segmented-toggle': () => import('../demo/Components/SegmentedToggleDemo'),
-  'animated-menu': () => import('../demo/Components/AnimatedMenuDemo')
+  'animated-menu': () => import('../demo/Components/AnimatedMenuDemo'),
+  'rainbow-button': () => import('../demo/Components/RainbowButtonDemo'),
+  'otp-input': () => import('../demo/Components/OtpInputDemo'),
+  'tooltip': () => import('../demo/Components/TooltipDemo')
 };
 
 export const componentMap = {
