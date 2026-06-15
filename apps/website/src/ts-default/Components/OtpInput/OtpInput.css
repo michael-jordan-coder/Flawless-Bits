@@ -1,0 +1,54 @@
+.otp-input {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.otp-input__cell {
+  position: relative;
+  width: 2.75rem;
+  height: 3.25rem;
+}
+
+.otp-input__field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  color: transparent;
+  caret-color: transparent;
+  text-align: center;
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.otp-input__ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 0.85rem;
+  border: 2px solid;
+  pointer-events: none;
+}
+
+.otp-input__glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  pointer-events: none;
+}
+
+.otp-input__caret {
+  width: 2px;
+  height: 1.4rem;
+  border-radius: 1px;
+}

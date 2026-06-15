@@ -14,7 +14,10 @@ export const CATEGORIES = [
       'Pill Nav',
       'Like Button',
       'Segmented Toggle',
-      'Animated Menu'
+      'Animated Menu',
+      'Rainbow Button',
+      'Otp Input',
+      'Tooltip'
     ]
   },
   {

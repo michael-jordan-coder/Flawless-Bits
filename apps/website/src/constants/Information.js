@@ -99,5 +99,23 @@ export const componentMetadata = {
     category: 'Components',
     name: 'AnimatedMenu',
     tags: ['menu', 'navigation', 'hover', 'icons', 'motion']
+  },
+  'Components/RainbowButton': {
+    description: 'A button wrapped in a continuously rotating conic-gradient rainbow that blooms into a glow on hover, inspired by Height.',
+    category: 'Components',
+    name: 'RainbowButton',
+    tags: ['button', 'cta', 'gradient', 'rainbow', 'motion']
+  },
+  'Components/OtpInput': {
+    description: 'A one-time-code input where digits pop in on a spring and the focus ring slides between cells, inspired by Family.',
+    category: 'Components',
+    name: 'OtpInput',
+    tags: ['form', 'otp', 'input', 'motion', 'layout']
+  },
+  'Components/Tooltip': {
+    description: 'A tooltip that springs in from the trigger with a directional slide and arrow, inspired by Discord.',
+    category: 'Components',
+    name: 'Tooltip',
+    tags: ['tooltip', 'overlay', 'hover', 'motion', 'popover']
   }
 };
