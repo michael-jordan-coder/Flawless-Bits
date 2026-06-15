@@ -1,0 +1,49 @@
+.number-ticker-root {
+  display: inline-flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+.number-ticker-reel {
+  position: relative;
+  display: inline-block;
+  width: 1ch;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.number-ticker-strip {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.number-ticker-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1ch;
+  height: 1em;
+}
+
+.number-ticker-sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1em;
+  padding: 0 0.02em;
+}
+
+.number-ticker-affix {
+  display: inline-flex;
+  align-items: center;
+  height: 1em;
+  white-space: pre;
+  opacity: 0.85;
+}

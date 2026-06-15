@@ -20,7 +20,8 @@ const components = {
   'tooltip': () => import('../demo/Components/TooltipDemo'),
   'score-meter': () => import('../demo/Components/ScoreMeterDemo'),
   'rubber-slider': () => import('../demo/Components/RubberSliderDemo'),
-  'star-rating': () => import('../demo/Components/StarRatingDemo')
+  'star-rating': () => import('../demo/Components/StarRatingDemo'),
+  'number-ticker': () => import('../demo/TextAnimations/NumberTickerDemo')
 };
 
 export const componentMap = {
