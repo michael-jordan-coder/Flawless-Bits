@@ -321,33 +321,33 @@ export const componentMetadata = {
     tags: ['stepper', 'input', 'number', 'quantity', 'press-hold', 'motion']
   },
   'Components/FlipCard': {
-    description: 'Flip Card component.',
+    description: 'A 3D flip card that reveals a back face on hover or click, with horizontal or vertical rotation and a spring-driven motion.',
     category: 'Components',
     name: 'FlipCard',
-    tags: []
+    tags: ['card', '3d', 'flip', 'hover', 'motion']
   },
   'Components/TagInput': {
-    description: 'Tag Input component.',
+    description: 'A chip-style tag input with animated add and remove, keyboard editing, duplicate guarding, and a max-tags limit.',
     category: 'Components',
     name: 'TagInput',
-    tags: []
+    tags: ['input', 'tags', 'chips', 'form', 'motion']
   },
   'Components/Tabs': {
-    description: 'Tabs component.',
+    description: 'Animated tabs with a sliding indicator, crossfading panels, full keyboard navigation, and underline or pill variants.',
     category: 'Components',
     name: 'Tabs',
-    tags: []
+    tags: ['tabs', 'navigation', 'indicator', 'motion']
   },
   'Components/SpeedDial': {
-    description: 'Speed Dial component.',
+    description: 'A floating action button that fans out staggered actions in any direction, with labels, hover or click triggering, and keyboard control.',
     category: 'Components',
     name: 'SpeedDial',
-    tags: []
+    tags: ['fab', 'menu', 'actions', 'button', 'motion']
   },
   'Backgrounds/Ripple': {
-    description: 'Ripple component.',
+    description: 'An interactive ripple background that emits ambient concentric rings and spawns new ripples wherever you press.',
     category: 'Backgrounds',
     name: 'Ripple',
-    tags: []
+    tags: ['background', 'ripple', 'interactive', 'motion']
   }
 };
