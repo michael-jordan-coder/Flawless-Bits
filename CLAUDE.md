@@ -73,12 +73,21 @@ Demos always import the component from `content/` (the JS+CSS variant).
 
 ## Components currently shipped
 
-- `Components/Dropdown` (`/components/dropdown`) — polished select dropdown with keyboard navigation, click-outside dismiss, active-descendant pattern, optional per-option descriptions, themable via `accentColor` + `surfaceColor`.
-- `Components/FillButton` (`/components/fill-button`) — pill button with a radial GSAP fill that reveals from the cursor entry point. Uses `gsap`, `@gsap/react`, `motion` (not `framer-motion`), `tailwind-merge`.
-- `Components/Sidebar` (`/components/sidebar`) — collapsible icon-rail sidebar with resize handle, accent + surface color tokens, badge support.
-- `Scroll/HoneycombGrid` (`/scroll/honeycomb-grid`) — infinite drag-tilable hex grid with fisheye scaling.
-- `ThreeD/PosterDrum` (`/3-d/poster-drum`) — cylindrical poster carousel with idle drift, drag inertia, HUD.
-- `ThreeD/PosterHelix` (`/3-d/poster-helix`) — vertical helix of posters with grain/vignette/axis overlays and twist drag.
+The registry constants are the canonical, always-current inventory — `src/constants/Information.js` (descriptions + tags), `src/constants/Categories.js` (sidebar order), and `src/constants/Components.js` (route slugs). The snapshot below covers **45 components across 5 categories** as of this writing; consult those files rather than trusting this list for exhaustiveness.
+
+The five live category folders are `Components`, `Backgrounds`, `Scroll`, `TextAnimations`, and `ThreeD` (sidebar display names: `Components`, `Backgrounds`, `Scroll`, `Text Animations`, `3D`).
+
+- **Components** (35): `Accordion`, `AnimatedMenu`, `AvatarStack`, `BorderBeam`, `CommandPalette`, `ConfettiButton`, `CopyButton`, `Dock`, `Dropdown`, `FillButton`, `FloatingInput`, `HoldButton`, `LikeButton`, `MagneticButton`, `Marquee`, `MoodPicker`, `OtpInput`, `PeekPassword`, `PillNav`, `RadialProgress`, `RainbowButton`, `RangeSlider`, `ReorderList`, `RubberSlider`, `ScoreMeter`, `SegmentedToggle`, `Sidebar`, `SpotlightCard`, `StarRating`, `Stepper`, `SwipeAction`, `ThemeToggle`, `TiltCard`, `Toast`, `Tooltip`.
+- **Backgrounds** (3): `Aurora`, `DotGrid`, `Particles`.
+- **TextAnimations** (4): `NumberTicker`, `ScrambleText`, `ShinyText`, `TypewriterText`.
+- **ThreeD** (2): `PosterDrum`, `PosterHelix`.
+- **Scroll** (1): `HoneycombGrid`.
+
+A few worth knowing the internals of: `Components/FillButton` (`gsap`, `@gsap/react`, `motion` — not `framer-motion` — `tailwind-merge`); `Scroll/HoneycombGrid` (virtualized fisheye hex grid); the two `ThreeD/Poster*` carousels (CSS-3D, single rAF loop). Most newer components are `motion`-driven micro-interactions ported from designspells.com / reactbits.dev — check each one's `Information.js` entry for its inspiration and dependency profile.
+
+## Component automation (`.claude/`)
+
+New components are typically added in batches by coordinated agent loops (the `[spell-loop]` commits in the history), driven by `.claude/loop.md`. The `.claude/skills/ui-bits-component-manager/SKILL.md` skill encodes the add/scaffold/rename/move recipe and is the preferred entry point for component work. `.claude/babysit-prs.md` documents the PR-babysitter flow that merges those component PRs and auto-resolves registry-only conflicts (the three constants files are append-only, so concurrent additions collide there predictably). `.claude/hooks/session-start.sh` runs on session start to prepare pnpm.
 
 ## Brand assets
 
