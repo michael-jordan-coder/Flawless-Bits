@@ -319,5 +319,35 @@ export const componentMetadata = {
     category: 'Components',
     name: 'Stepper',
     tags: ['stepper', 'input', 'number', 'quantity', 'press-hold', 'motion']
+  },
+  'Components/FlipCard': {
+    description: 'Flip Card component.',
+    category: 'Components',
+    name: 'FlipCard',
+    tags: []
+  },
+  'Components/TagInput': {
+    description: 'Tag Input component.',
+    category: 'Components',
+    name: 'TagInput',
+    tags: []
+  },
+  'Components/Tabs': {
+    description: 'Tabs component.',
+    category: 'Components',
+    name: 'Tabs',
+    tags: []
+  },
+  'Components/SpeedDial': {
+    description: 'Speed Dial component.',
+    category: 'Components',
+    name: 'SpeedDial',
+    tags: []
+  },
+  'Backgrounds/Ripple': {
+    description: 'Ripple component.',
+    category: 'Backgrounds',
+    name: 'Ripple',
+    tags: []
   }
 };
