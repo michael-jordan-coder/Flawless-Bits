@@ -36,7 +36,9 @@ export const CATEGORIES = [
       'Swipe Action',
       'Spotlight Card',
       'Border Beam',
-      'Confetti Button'
+      'Confetti Button',
+      'Marquee',
+      'Radial Progress'
     ]
   },
   {
@@ -49,13 +51,14 @@ export const CATEGORIES = [
   },
   {
     name: 'Text Animations',
-    subcategories: ['Scramble Text', 'Number Ticker', 'Typewriter Text']
+    subcategories: ['Scramble Text', 'Number Ticker', 'Typewriter Text', 'Shiny Text']
   },
   {
     name: 'Backgrounds',
     subcategories: [
       'Dot Grid',
-      'Aurora'
+      'Aurora',
+      'Particles'
     ]
   }
 ];
