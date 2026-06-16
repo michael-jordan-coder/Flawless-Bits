@@ -38,7 +38,7 @@ function StepperButton({ label, accentColor, disabled, onStart, onStop, prefersR
   return (
     <motion.button
       type="button"
-      className="inline-flex h-10 w-10 flex-none cursor-pointer items-center justify-center rounded-[10px] border-none bg-white/[0.06] p-0 touch-none enabled:hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-35"
+      className="inline-flex h-10 w-10 flex-none cursor-pointer items-center justify-center rounded-[9999px] border-none bg-white/[0.06] p-0 touch-none enabled:hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-35"
       style={{ color: accentColor }}
       aria-label={label}
       disabled={disabled}
