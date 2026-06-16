@@ -8,7 +8,13 @@ export const coverFlow = {
   dependencies: '',
   usage: `import CoverFlow from './CoverFlow';
 
-<CoverFlow />`,
+const items = [
+  { id: 1, image: '/covers/aurora.jpg', title: 'Aurora Drift', meta: 'Slowcore · 2019' },
+  { id: 2, image: '/covers/longshore.jpg', title: 'Longshore', meta: 'Ambient · 2021' },
+  // ...
+];
+
+<CoverFlow items={items} height={560} />`,
   code,
   css,
   tailwind,
