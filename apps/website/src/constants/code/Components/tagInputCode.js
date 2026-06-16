@@ -5,10 +5,15 @@ import tsCode from '@ts-default/Components/TagInput/TagInput.tsx?raw';
 import tsTailwind from '@ts-tailwind/Components/TagInput/TagInput.tsx?raw';
 
 export const tagInput = {
-  dependencies: '',
+  dependencies: 'motion lucide-react',
   usage: `import TagInput from './TagInput';
 
-<TagInput />`,
+<TagInput
+  defaultTags={['design', 'react', 'motion']}
+  maxTags={8}
+  accentColor="#6366f1"
+  onChange={tags => console.log(tags)}
+/>`,
   code,
   css,
   tailwind,
