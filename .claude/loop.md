@@ -2,12 +2,12 @@
 
 ## Scheduling model
 
-This prompt is designed for a **Claude Code Desktop Scheduled Task**, not a bare `/loop`.
+This prompt is designed for a **Claude Code Desktop Scheduled Task**.
 
 Configure the scheduled task to run:
 
 ```txt
-every 10 minutes
+once (it loops internally until the stop conditions are met)
 ```
 
 for a maximum intended window of:
@@ -16,40 +16,30 @@ for a maximum intended window of:
 3 hours
 ```
 
-Use a fresh Claude Code Desktop scheduled-task session for each run.
-
-Each run must create **at most ONE** new component.
-
-Do not keep the session alive waiting for the next run.
-Do not use `/loop` from inside this task.
-Do not self-schedule another task.
-Do not compensate for missed runs by creating multiple components.
-If a previous scheduled run was missed, skipped, delayed, or caught up later, still create at most ONE component.
+The task runs a continuous internal loop — it keeps building components back-to-back, compacting context between each one, until a stop condition triggers. Do not configure it to run on a repeating interval; one session is the full run.
 
 Recommended scheduled-task settings:
 
 * Working folder: repo root
-* Use isolated worktree: enabled, if available
+* Use isolated worktree: disabled (the loop needs to push branches)
 * Permission mode: use the safest mode that can still run the pipeline without stalling
 * First run: run manually once and approve required recurring permissions before leaving it unattended
 
 ## Autonomous task
 
-Add ONE new, high-quality, genuinely useful component to the ui bits library in this repo:
+Continuously add new, high-quality, genuinely useful components to the ui bits library in this repo:
 
 ```txt
 apps/website/
 ```
 
-The component must be sourced from a delightful interaction documented on:
+Each component must be sourced from a delightful interaction documented on:
 
 ```txt
 https://designspells.com
 ```
 
-Then run the full pipeline end-to-end and auto-merge to `main`.
-
-Exactly one component per scheduled run.
+Run the full pipeline end-to-end for each component, open a PR, then immediately compact context and start the next component. Repeat until the stop conditions trigger.
 
 ## Stop check
 
@@ -85,6 +75,13 @@ If either stop condition is true:
 * post a one-message final summary of every component the loop added
 * if the scheduled-task management tool is available, pause or disable this scheduled task
 
+If `git fetch` fails (network error, auth issue), do not proceed. End the run with:
+
+```txt
+Status: stopped
+Reason: git fetch failed — cannot verify stop conditions
+```
+
 If the stop check is unclear because commit timestamps are missing or ambiguous, do not guess. Run a more detailed git command such as:
 
 ```bash
@@ -93,7 +90,7 @@ git log --grep='\[spell-loop\]' --pretty=format:'%h %cI %s' origin/main
 
 Then decide from the commit timestamps.
 
-If the loop is still inside the 3-hour / 18-component window, continue.
+If the loop is still inside the 3-hour / 18-component window, continue to the next component.
 
 ## 1) Avoid duplicates
 
@@ -139,11 +136,11 @@ Choose an interaction that maps to a self-contained, reusable, controllable UI c
 
 The component should be genuinely useful, not merely decorative.
 
-If you truly cannot find a fresh high-quality spell on designspells.com, fall back to:
+If you truly cannot find a fresh high-quality spell on designspells.com, fall back in this order:
 
-```txt
-https://reactbits.dev
-```
+1. `https://reactbits.dev` — component interactions and animation patterns
+2. `https://shapeof.ai` — world-class AI product UI interactions
+3. `https://mobbin.com` — real-world UI/UX flows from top-tier apps
 
 Record the source URL clearly.
 
@@ -159,7 +156,17 @@ From the repo root, run:
 cd apps/website && node scripts/generateComponent.js <Category> <PascalName>
 ```
 
-Use `Components` unless another category clearly fits better.
+Use `Components` as the default. Only use another existing category if the component is an unambiguous fit:
+
+| Category | Use when |
+|---|---|
+| `Components` | Interactive UI elements (buttons, inputs, menus, overlays) |
+| `ThreeD` | Requires a 3D canvas or three.js/WebGL |
+| `Scroll` | Primarily driven by scroll position |
+| `TextAnimations` | Text-only animation with no interactive controls |
+| `Backgrounds` | Full-bleed, non-interactive background layers |
+
+Do NOT invent a new category. If nothing fits, use `Components`.
 
 Then fully author all FOUR variants so they look and behave identically:
 
@@ -211,17 +218,27 @@ pnpm build
 
 Requirements:
 
-* `pnpm lint` must pass
-* max warnings must be 0
-* `pnpm build` must pass
+* `pnpm lint` must exit 0 with zero warnings
+* `pnpm build` must exit 0
 * registry build must succeed
 * Vite build must succeed
 
-Then serve the app and curl the new component route.
+Then verify the new component route is registered correctly by running the Vite dev server in the background and curling its output:
 
-The new route must return HTTP 200.
+```bash
+pnpm --filter website dev &
+DEV_PID=$!
+sleep 8
+SLUG=$(echo "<kebab-slug>" | tr '[:upper:]' '[:lower:]')
+curl -s -o /dev/null -w "%{http_code}" "http://localhost:5173/components/${SLUG}"
+kill $DEV_PID 2>/dev/null
+```
 
-If the route does not return 200, fix it before shipping.
+Replace `<kebab-slug>` with the actual route slug (e.g. `rubber-slider`).
+
+The route must return HTTP 200.
+
+If it returns anything other than 200, fix the registration in `Components.js` / `Information.js` / `Categories.js` before shipping. Do not kill the build loop to paper over a routing failure.
 
 ## 5) Ship
 
@@ -243,46 +260,57 @@ The commit message MUST include:
 
 Push the branch.
 
-Open a PR to `main`.
+Open a PR to `main`:
 
-Squash-merge the PR into `main`.
+```bash
+gh pr create --title "<ComponentName> [spell-loop]" --body "Source: <spell-url>" --base main
+```
 
-Do not leave the PR open.
+Do not merge the PR yourself. The PR babysitter (`.claude/babysit-prs.md`) will merge it after verifying lint and build pass. Your job is done once the PR is open.
 
-Do not merge if anything is broken.
+## 6) Compact and continue
+
+After the PR is open, emit this per-component summary:
+
+```txt
+✓ Component: <name>
+  Source: <url>
+  Branch: <branch>
+  PR: <url>
+```
+
+Then immediately compact the conversation context to free up space for the next component:
+
+```
+/compact
+```
+
+After compacting, go directly back to **Stop check**. Do not pause, do not wait. If the stop conditions are not met, start the next component immediately.
+
+This is a continuous loop. Keep building until the stop conditions trigger.
 
 ## Failure rule
 
-If the component cannot be made green, abandon that idea and end the run cleanly.
+If a component cannot be made green:
 
-Do not merge broken code.
+* Abandon that idea
+* Clean up any partial branch or uncommitted files
+* Emit a one-line failure note: `✗ Skipped: <name> — <reason>`
+* Compact the conversation context: `/compact`
+* Go directly back to **Stop check** and start fresh on the next component
 
-Do not leave half-finished work on `main`.
-
-Do not create a second component in the same run.
-
-One scheduled run always means one component maximum.
+Do not leave half-finished work on `main`. Do not give up on the whole session because one component failed.
 
 ## Final response format
 
-At the end of each run, respond with one compact summary:
-
-```txt
-Status:
-Component:
-Source:
-Branch:
-PR:
-Verification:
-Merged:
-Notes:
-```
-
-If the stop check triggered, respond with:
+When the stop check triggers (session ends), emit one summary of everything the loop accomplished:
 
 ```txt
 Status: stopped
-Reason:
-Components added in this loop:
-Final notes:
+Reason: <18 components reached | 3-hour window expired>
+Components added this session:
+  1. <name> — PR #<n> — <source>
+  2. <name> — PR #<n> — <source>
+  ...
+Skipped: <list with reasons, or "none">
 ```
