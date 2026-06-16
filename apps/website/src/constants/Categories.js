@@ -38,7 +38,8 @@ export const CATEGORIES = [
       'Border Beam',
       'Confetti Button',
       'Marquee',
-      'Radial Progress'
+      'Radial Progress',
+      'Range Slider'
     ]
   },
   {

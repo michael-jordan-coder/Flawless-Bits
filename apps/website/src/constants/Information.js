@@ -291,5 +291,12 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Particles',
     tags: ['canvas', 'background', 'particles', 'starfield', 'ambient']
+  },
+  'Components/RangeSlider': {
+    description:
+      'Dual-handle range selector with a minimum-gap guard, animated fill, and a value tooltip that springs over the active handle — inspired by the draggable price-range filters on designspells.com.',
+    category: 'Components',
+    name: 'RangeSlider',
+    tags: ['slider', 'range', 'input', 'filter', 'price', 'dual-handle', 'accessible']
   }
 };
