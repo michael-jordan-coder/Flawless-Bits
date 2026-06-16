@@ -112,7 +112,7 @@ export default function Stepper({
   return (
     <div
       className={join(
-        'inline-flex select-none items-center gap-1 rounded-[14px] border border-white/[0.08] p-[0.3rem] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
+        'inline-flex select-none items-center gap-1 rounded-[9999px] border border-white/[0.08] p-[0.3rem] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
         className
       )}
       style={{ background: surfaceColor }}
