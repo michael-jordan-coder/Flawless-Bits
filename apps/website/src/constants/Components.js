@@ -43,7 +43,8 @@ const components = {
   'marquee': () => import('../demo/Components/MarqueeDemo'),
   'radial-progress': () => import('../demo/Components/RadialProgressDemo'),
   'shiny-text': () => import('../demo/TextAnimations/ShinyTextDemo'),
-  'particles': () => import('../demo/Backgrounds/ParticlesDemo')
+  'particles': () => import('../demo/Backgrounds/ParticlesDemo'),
+  'range-slider': () => import('../demo/Components/RangeSliderDemo')
 };
 
 export const componentMap = {
