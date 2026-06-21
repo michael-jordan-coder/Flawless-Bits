@@ -24,6 +24,7 @@ body {
   background-color: var(--bg-body);
   color: #fff;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 #root {
@@ -65,7 +66,8 @@ a {
   grid-template-columns: 56px minmax(0, 1fr);
 }
 
-@media (max-width: 1180px) {
+/* Right customize rail drops out once the 3-up grid gets cramped. */
+@media (max-width: 73.75rem) {
   .category-wrapper,
   .category-wrapper--collapsed {
     grid-template-columns: 260px minmax(0, 1fr);
@@ -78,10 +80,19 @@ a {
   }
 }
 
-@media (max-width: 960px) {
+/* Sidebar → drawer: collapse to a single content column (mirrors the 60rem
+   useIsMobile breakpoint that swaps the desktop sidebar for the mobile nav). */
+@media (max-width: 60rem) {
+  /* Sidebar + right rail are both display:none here, so the content takes the
+     whole row. The :has(:empty) variants are listed explicitly because :has()
+     raises their specificity above a bare .category-wrapper rule — without them
+     the empty-slot grid would keep a dead 260px first track where the hidden
+     sidebar used to be. */
   .category-wrapper,
-  .category-wrapper--collapsed {
-    grid-template-columns: 1fr;
+  .category-wrapper--collapsed,
+  .category-wrapper:has(.right-panel-slot:empty),
+  .category-wrapper--collapsed:has(.right-panel-slot:empty) {
+    grid-template-columns: minmax(0, 1fr);
     padding: 1em;
     gap: 1em;
   }
@@ -357,9 +368,8 @@ a {
   padding: 2px 6px;
   border-radius: 4px;
   margin-left: 6px;
-  text-transform: uppercase;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 
 .new-tag {
@@ -529,9 +539,8 @@ a {
   background: var(--surface-neutral-elevated);
   color: var(--text-muted);
   font-weight: 500;
-  text-transform: uppercase;
   font-size: 12px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 
 .prop-table tr:last-child td {
@@ -561,7 +570,8 @@ a {
   display: none;
 }
 
-@media (max-width: 720px) {
+/* Prop table → stacked cards where columns stop fitting their content. */
+@media (max-width: 45rem) {
   .prop-table-wrap {
     display: none;
   }
@@ -753,9 +763,9 @@ a {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  margin: -8px -8px -8px 0;
+  width: 44px;
+  height: 44px;
+  margin: -10px -10px -10px 0;
   padding: 0;
   background: transparent;
   border: 0;
@@ -1120,7 +1130,7 @@ a {
 }
 
 /* ==========================================================================
-   Mobile (≤960px)
+   Mobile (≤60rem / 960px)
    All rules below are scoped to the mobile breakpoint and must never affect
    the desktop layout. The drawer / bottom-sheet markup is only mounted on
    mobile (gated by the useIsMobile hook), so their styles are inert otherwise.
@@ -1191,8 +1201,9 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  margin: -4px -8px -4px 0;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -1240,7 +1251,7 @@ a {
 }
 
 .mobile-nav-section .sidebar-item {
-  min-height: 40px;
+  min-height: 44px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1334,8 +1345,9 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  margin: -4px -8px -4px 0;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -1362,7 +1374,7 @@ body.mobile-sheet-open {
   overflow: hidden;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 60rem) {
   /* Navbar: swap inline links for the hamburger. */
   .cb-navbar {
     padding: 0.875em 1.25em;
@@ -1376,7 +1388,7 @@ body.mobile-sheet-open {
 
   /* Docs layout: drop the desktop rail + right panel, go full width.
      The single-column .category-wrapper grid is already handled by the
-     existing @media (max-width: 960px) block above. */
+     existing @media (max-width: 60rem) block above. */
   .sidebar {
     display: none;
   }

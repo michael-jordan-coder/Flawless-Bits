@@ -32,6 +32,8 @@ const CodeHighlighter = ({ language, codeString, showLineNumbers = true }) => {
         className="code-highlighter"
         customStyle={{
           margin: 0,
+          maxWidth: '100%',
+          overflowX: 'auto',
           background: 'var(--surface-neutral)',
           border: '1px solid var(--surface-neutral-border)',
           padding: '1em'

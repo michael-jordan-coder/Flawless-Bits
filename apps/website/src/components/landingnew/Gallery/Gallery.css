@@ -49,7 +49,8 @@
     'dots  dots  fill  fill';
 }
 
-@media (max-width: 900px) {
+/* Bento → 2-col regroup where the 4-up tiles get too narrow to read. */
+@media (max-width: 56.25rem) {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
@@ -64,7 +65,8 @@
   }
 }
 
-@media (max-width: 600px) {
+/* 2-col → single-column stack where two tiles no longer fit side by side. */
+@media (max-width: 37.5rem) {
   .gallery-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: 220px;
