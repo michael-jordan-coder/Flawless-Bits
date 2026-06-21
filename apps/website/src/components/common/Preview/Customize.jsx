@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SlidersHorizontal, X } from 'lucide-react';
 import useIsMobile from '../../../hooks/useIsMobile';
+import useFocusTrap from '../../../hooks/useFocusTrap';
 
 const CustomizePanel = ({ children }) => (
   <div className="customize-panel">
@@ -25,6 +26,7 @@ const DesktopCustomize = ({ children }) => {
 // Mobile: a floating trigger that opens a bottom-sheet drawer with the controls.
 const MobileCustomize = ({ children }) => {
   const [open, setOpen] = useState(false);
+  const sheetRef = useFocusTrap(open);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -52,7 +54,14 @@ const MobileCustomize = ({ children }) => {
       {createPortal(
         <div className={`customize-sheet${open ? ' customize-sheet--open' : ''}`} aria-hidden={!open}>
           <div className="customize-sheet-backdrop" onClick={() => setOpen(false)} />
-          <div className="customize-sheet-panel" role="dialog" aria-label="Customize component">
+          <div
+            className="customize-sheet-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Customize component"
+            ref={sheetRef}
+            tabIndex={-1}
+          >
             <div className="customize-sheet-handle" aria-hidden="true" />
             <div className="customize-sheet-header">
               <h2 className="customize-panel-title">Customize</h2>

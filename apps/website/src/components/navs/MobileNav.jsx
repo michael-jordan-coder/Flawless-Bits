@@ -7,6 +7,7 @@ import { CATEGORIES, NEW, UPDATED } from '../../constants/Categories';
 import { componentMap } from '../../constants/Components';
 import { useTransition } from '../../hooks/useTransition';
 import { slug } from '../../utils/utils';
+import useFocusTrap from '../../hooks/useFocusTrap';
 import Logo from '../common/Logo';
 
 const PRIMARY_LINKS = [
@@ -28,6 +29,7 @@ const MobileNav = ({ open, onClose }) => {
   const navigate = useNavigate();
   const { startTransition, isTransitioning } = useTransition();
   const [query, setQuery] = useState('');
+  const panelRef = useFocusTrap(open);
 
   // Lock body scroll while the drawer is open.
   useEffect(() => {
@@ -84,7 +86,14 @@ const MobileNav = ({ open, onClose }) => {
   const content = (
     <div className={`mobile-nav${open ? ' mobile-nav--open' : ''}`} aria-hidden={!open}>
       <div className="mobile-nav-backdrop" onClick={onClose} />
-      <nav className="mobile-nav-panel" aria-label="Mobile navigation">
+      <nav
+        className="mobile-nav-panel"
+        aria-label="Mobile navigation"
+        aria-modal="true"
+        role="dialog"
+        ref={panelRef}
+        tabIndex={-1}
+      >
         <div className="mobile-nav-header">
           <Link to="/" className="mobile-nav-brand" onClick={onClose}>
             <Logo size={18} strokeWidth={1.4} dotRadius={1.3} />
