@@ -66,7 +66,9 @@ const components = {
   'scroll-velocity': () => import('../demo/Scroll/ScrollVelocityDemo'),
   'grid': () => import('../demo/Backgrounds/GridDemo'),
   'scroll-reveal': () => import('../demo/Scroll/ScrollRevealDemo'),
-  'beams': () => import('../demo/Backgrounds/BeamsDemo')
+  'beams': () => import('../demo/Backgrounds/BeamsDemo'),
+  'horizontal-scroll': () => import('../demo/Scroll/HorizontalScrollDemo'),
+  'threads': () => import('../demo/Backgrounds/ThreadsDemo')
 };
 
 export const componentMap = {

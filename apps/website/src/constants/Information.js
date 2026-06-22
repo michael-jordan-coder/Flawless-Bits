@@ -436,5 +436,17 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Beams',
     tags: ['background', 'beams', 'light', 'canvas', 'ambient']
+  },
+  'Scroll/HorizontalScroll': {
+    description: 'A sticky section that turns vertical scroll into a horizontal card pan — the vertical-to-horizontal scroll gallery.',
+    category: 'Scroll',
+    name: 'HorizontalScroll',
+    tags: ['scroll', 'horizontal', 'gallery', 'sticky', 'motion']
+  },
+  'Backgrounds/Threads': {
+    description: 'A weave of vertical threads swaying with stacked sine harmonics like hanging silk — a flowing-thread backdrop.',
+    category: 'Backgrounds',
+    name: 'Threads',
+    tags: ['background', 'threads', 'lines', 'canvas', 'ambient']
   }
 };
