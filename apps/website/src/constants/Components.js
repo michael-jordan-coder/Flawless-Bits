@@ -76,7 +76,13 @@ const components = {
   'scroll-spy-nav': () => import('../demo/Scroll/ScrollSpyNavDemo'),
   'grain': () => import('../demo/Backgrounds/GrainDemo'),
   'flow-field': () => import('../demo/Backgrounds/FlowFieldDemo'),
-  'sticky-grid-scroll': () => import('../demo/Scroll/StickyGridScrollDemo')
+  'sticky-grid-scroll': () => import('../demo/Scroll/StickyGridScrollDemo'),
+  'gooey-menu': () => import('../demo/Components/GooeyMenuDemo'),
+  'password-strength': () => import('../demo/Components/PasswordStrengthDemo'),
+  'ripple-button': () => import('../demo/Components/RippleButtonDemo'),
+  'path-draw': () => import('../demo/Scroll/PathDrawDemo'),
+  'mesh-gradient': () => import('../demo/Backgrounds/MeshGradientDemo'),
+  'bottom-sheet': () => import('../demo/Components/BottomSheetDemo')
 };
 
 export const componentMap = {
