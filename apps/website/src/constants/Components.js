@@ -70,7 +70,9 @@ const components = {
   'horizontal-scroll': () => import('../demo/Scroll/HorizontalScrollDemo'),
   'threads': () => import('../demo/Backgrounds/ThreadsDemo'),
   'scroll-progress': () => import('../demo/Scroll/ScrollProgressDemo'),
-  'starfield': () => import('../demo/Backgrounds/StarfieldDemo')
+  'starfield': () => import('../demo/Backgrounds/StarfieldDemo'),
+  'parallax-scroll': () => import('../demo/Scroll/ParallaxScrollDemo'),
+  'plasma': () => import('../demo/Backgrounds/PlasmaDemo')
 };
 
 export const componentMap = {

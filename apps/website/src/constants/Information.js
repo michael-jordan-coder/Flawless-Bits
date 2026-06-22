@@ -460,5 +460,17 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Starfield',
     tags: ['background', 'stars', 'warp', 'canvas', 'space']
+  },
+  'Scroll/ParallaxScroll': {
+    description: 'A scroll panel whose decorative backdrop drifts slower than the foreground for depth — the parallax scroll section.',
+    category: 'Scroll',
+    name: 'ParallaxScroll',
+    tags: ['scroll', 'parallax', 'depth', 'sticky', 'motion']
+  },
+  'Backgrounds/Plasma': {
+    description: 'A single-hue plasma field flowing from stacked sine waves, rendered low-res and scaled up — a soft plasma backdrop.',
+    category: 'Backgrounds',
+    name: 'Plasma',
+    tags: ['background', 'plasma', 'waves', 'canvas', 'ambient']
   }
 };
