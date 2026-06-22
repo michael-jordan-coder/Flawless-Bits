@@ -110,6 +110,19 @@ Never re-create, lightly re-skin, rename, or duplicate an existing component.
 
 The new component must be meaningfully different in interaction model, use case, or behavior.
 
+**Keep a candidate backlog** at the bottom of this file (`## Candidate backlog`).
+Before building, pick the next unbuilt entry instead of re-deriving ideas from
+scratch each loop; when you discover good interactions you won't build this round,
+append them. This avoids re-reading the whole registry every loop and prevents
+near-duplicate ideas across loops.
+
+**Concurrency isolation.** If other agents may be working in this repo at the same
+time (they share ONE working tree / HEAD), do all git + build work in a dedicated
+worktree so you never disturb their checkout:
+`git worktree add --detach <path> origin/main`, then symlink `node_modules` and
+`apps/website/node_modules` into it. Never `git checkout` in the shared tree while
+another agent holds a branch there.
+
 ## 2) Discover a spell
 
 Find a fresh interaction on:
@@ -175,14 +188,28 @@ Then fully author all FOUR variants so they look and behave identically:
 * TS + CSS
 * TS + Tailwind
 
+**Author the two JS variants by hand, then derive the rest mechanically.** The
+TS variants differ from the JS variants only by type annotations, and the
+`ts-default` CSS is a byte copy of the `content` CSS. Do not hand-retype them —
+after writing `content/<Name>.{jsx,css}` and `tailwind/<Name>.jsx`, run:
+
+```bash
+cd apps/website && node scripts/generateTsVariants.js <Category> <Name>
+```
+
+It copies the CSS byte-identically and generates both `.tsx` variants (typed
+props interface inferred from the prop defaults, typed refs, type-only imports).
+Read its output and fix any prop the inference couldn't type confidently. This
+roughly halves the per-component authoring volume.
+
 Rules:
 
 * Animate with the `motion` package using `motion/react`
 * Do NOT use `framer-motion`
 * Use icons from `lucide-react`
-* The two CSS files in `content/` and `ts-default/` MUST be byte-identical
-* Copy the CSS file with `cp` to guarantee byte identity
+* The two CSS files in `content/` and `ts-default/` MUST be byte-identical (the codemod guarantees this; verify with `cmp`)
 * Apply dynamic colors, sizes, and runtime styling through inline styles
+* Registry component sources hardcode their own palettes (inline hex) on purpose — they are standalone copy-paste artifacts and cannot reference site tokens; this is correct, not a violation
 * Keep the component polished, accessible, and reduced-motion-friendly where reasonable
 * Avoid overbuilding; make one focused, excellent component
 
@@ -223,50 +250,69 @@ Requirements:
 * registry build must succeed
 * Vite build must succeed
 
-Then verify the new component route is registered correctly by running the Vite dev server in the background and curling its output:
+Then verify registration against the **build output**, not a route status. The app
+is a SPA — every path rewrites to `index.html`, so `curl /…/<slug>` returns `200`
+for any string and proves nothing. The real signal is that `pnpm build` compiled
+the demo's lazy import into a chunk and the slug landed in the registry bundle:
 
 ```bash
-pnpm --filter ui-bits-website dev &
-DEV_PID=$!
-sleep 8
-SLUG=$(echo "<kebab-slug>" | tr '[:upper:]' '[:lower:]')
-curl -s -o /dev/null -w "%{http_code}" "http://localhost:5173/components/${SLUG}"
-kill $DEV_PID 2>/dev/null
+# from apps/website, after `pnpm build`
+SLUG="<kebab-slug>"                       # e.g. scroll-stack
+NAME="<PascalName>"                        # e.g. ScrollStack
+grep -rlq "$SLUG" dist/assets/ && echo "✓ slug registered" || echo "✗ slug MISSING"
+ls dist/assets/ | grep -q "${NAME}Demo-"  && echo "✓ demo chunk built" || echo "✗ demo chunk MISSING"
 ```
 
-Replace `<kebab-slug>` with the actual route slug (e.g. `rubber-slider`).
+Both checks must pass. If the slug is missing, fix the registration in
+`Components.js` / `Information.js` / `Categories.js` before shipping. A dev-server
+`200` is NOT acceptance — do not use it to declare the route working.
 
-The route must return HTTP 200.
-
-If it returns anything other than 200, fix the registration in `Components.js` / `Information.js` / `Categories.js` before shipping. Do not kill the build loop to paper over a routing failure.
+Also confirm the two CSS files are byte-identical: `cmp content/<…>.css ts-default/<…>.css`.
 
 ## 5) Ship
 
-Create a fresh branch off the latest `origin/main`.
+**Batch the loop's components into ONE branch/PR.** The three registry constants
+files (`Components.js`, `Categories.js`, `Information.js`) are append-only, so two
+concurrent single-component PRs ALWAYS collide there. Building N components on one
+branch eliminates that conflict entirely and cuts PR/merge/deploy overhead.
 
-Branch name format:
+Create a fresh branch off the latest `origin/main`. Branch name: `spell/<slug>`
+(or `spell/<slugA>-<slugB>` for a batch).
 
-```txt
-spell/<slug>
-```
+Commit the completed work. The commit message MUST include the literal tag
+`[spell-loop]`, the component name(s), and the source spell URL(s).
 
-Commit the completed work.
-
-The commit message MUST include:
-
-* the literal tag `[spell-loop]`
-* the component name
-* the source spell URL
-
-Push the branch.
-
-Open a PR to `main`:
+Push the branch and open a PR to `main`:
 
 ```bash
-gh pr create --title "<ComponentName> [spell-loop]" --body "Source: <spell-url>" --base main
+gh pr create --title "Add <Names> [spell-loop]" --body "Source: <spell-url(s)>" --base main
 ```
 
-Do not merge the PR yourself. The PR babysitter (`.claude/babysit-prs.md`) will merge it after verifying lint and build pass. Your job is done once the PR is open.
+**Merging & deploying (self-merging runs).** When no PR babysitter is running,
+merge it yourself once Verify is green:
+
+```bash
+gh pr merge <branch> --squash --delete-branch
+```
+
+Then deploy production. Vercel git auto-deploy is BROKEN for this repo, and a
+plain `vercel deploy --prod` from a worktree silently rebuilds a STALE git ref
+(same bundle hash, new components absent) — `--force` does not fix it. Use the
+prebuilt + explicit-alias recipe (build locally, upload the output, move the
+domain alias):
+
+```bash
+# from a clean checkout of merged origin/main (a dedicated worktree is fine)
+vercel build --prod --yes --scope dadas-projects-5692ffa9
+grep -rlq "<slug>" .vercel/output/static/assets/   # confirm the build has it
+URL=$(vercel deploy --prebuilt --prod --yes --scope dadas-projects-5692ffa9 | grep -oE 'https://community-bits-[a-z0-9]+-dadas-projects-5692ffa9\.vercel\.app' | tail -1)
+vercel alias set "$URL" community-bits.vercel.app --scope dadas-projects-5692ffa9
+```
+
+Verify live: the served `/assets/index-*.js` hash must match your local
+`apps/website/dist` hash and contain the slug; demo chunks return 200.
+
+If a PR babysitter IS running, skip the merge/deploy — open the PR and stop.
 
 ## 6) Compact and continue
 
@@ -288,6 +334,17 @@ Then immediately compact the conversation context to free up space for the next 
 After compacting, go directly back to **Stop check**. Do not pause, do not wait. If the stop conditions are not met, start the next component immediately.
 
 This is a continuous loop. Keep building until the stop conditions trigger.
+
+## 7) Improve this prompt every loop
+
+Before starting the next component, spend one short reflection on **this file**:
+note any friction you hit this loop (a repeated manual step, a misleading
+instruction, a check that gave a false signal, a tool that fought you) and make a
+small, concrete edit to `loop.md` that would have prevented it — tighten a step,
+fix a stale command, add a guard, append to the candidate backlog, or record a
+gotcha. Keep edits surgical and high-signal; do not bloat the prompt. The loop
+should get sharper every iteration, not just longer. If nothing genuinely needs
+changing this loop, say so in one line and move on — do not invent busywork.
 
 ## Failure rule
 
@@ -314,3 +371,26 @@ Components added this session:
   ...
 Skipped: <list with reasons, or "none">
 ```
+
+## Candidate backlog
+
+Pick the next unbuilt entry; cross out / delete when shipped; append new finds.
+Verify against the registry before building — the list is a hint, not a guarantee
+the idea is still novel.
+
+**Scroll**
+- ScrollSnapCarousel — CSS scroll-snap gallery with active-dot sync (mobbin gallery pattern)
+- ScrollMinimap — a side rail that maps section positions and scrolls-to on click
+- ScrollSpyNav — sticky nav whose active item tracks the section in view
+- ImageCompareScroll — before/after wipe driven by scroll progress
+
+**Backgrounds**
+- Spotlight — a single soft radial light drifting a slow path over a flat surface (distinct from Grid's bloom: no grid)
+- Grain — animated film-grain/noise overlay over a flat or tinted surface
+- Constellation — slow points linked by proximity lines (distinct from Particles' optional connect: graph-like, denser)
+- Contour — animated topographic isolines (marching-squares of a moving noise field)
+- Rays — soft volumetric light rays fanning from an off-screen point
+
+**Already shipped this lineage (do NOT rebuild):** ScrollStack, ScrollVelocity,
+ScrollReveal, HorizontalScroll, ScrollProgress, ParallaxScroll, Waves, Grid,
+Beams, Threads, Starfield, Plasma, HoneycombGrid, DotGrid, Aurora, Particles, Ripple.
