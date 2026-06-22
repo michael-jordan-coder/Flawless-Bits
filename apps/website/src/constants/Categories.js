@@ -68,7 +68,8 @@ export const CATEGORIES = [
     subcategories: ['Honeycomb Grid',
       'Scroll Stack',
       'Scroll Velocity',
-      'Scroll Reveal'
+      'Scroll Reveal',
+      'Horizontal Scroll'
     ]
   },
   {
@@ -84,7 +85,8 @@ export const CATEGORIES = [
       'Ripple',
       'Waves',
       'Grid',
-      'Beams'
+      'Beams',
+      'Threads'
     ]
   }
 ];

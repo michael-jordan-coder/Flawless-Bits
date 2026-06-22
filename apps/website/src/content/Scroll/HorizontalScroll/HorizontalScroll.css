@@ -1,0 +1,87 @@
+.hscroll {
+  position: relative;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 18px;
+  background-color: #08080c;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hscroll-sizer {
+  position: relative;
+  width: 100%;
+}
+
+.hscroll-sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hscroll-track {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  padding: 0 24px;
+  will-change: transform;
+}
+
+.hscroll-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  min-height: 220px;
+  padding: 24px 26px;
+  border-radius: 16px;
+  background: var(--hscroll-accent, #5227ff);
+  color: #fff;
+}
+
+.hscroll-index {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  opacity: 0.78;
+}
+
+.hscroll-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hscroll-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.hscroll-subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hscroll--reduced .hscroll-sticky {
+  position: relative;
+  overflow-x: auto;
+}
+
+.hscroll--reduced .hscroll-track {
+  gap: inherit;
+}
