@@ -70,7 +70,8 @@ export const CATEGORIES = [
       'Scroll Velocity',
       'Scroll Reveal',
       'Horizontal Scroll',
-      'Scroll Progress'
+      'Scroll Progress',
+      'Parallax Scroll'
     ]
   },
   {
@@ -88,7 +89,8 @@ export const CATEGORIES = [
       'Grid',
       'Beams',
       'Threads',
-      'Starfield'
+      'Starfield',
+      'Plasma'
     ]
   }
 ];
