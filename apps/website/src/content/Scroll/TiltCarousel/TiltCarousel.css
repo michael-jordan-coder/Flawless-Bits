@@ -1,0 +1,98 @@
+.tilt-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.tilt-carousel-scroller {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--tilt-carousel-gap, 18px);
+  height: var(--tilt-carousel-height, 360px);
+  padding-inline: var(--tilt-carousel-peek, 13%);
+  padding-block: 28px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tilt-carousel-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.tilt-carousel-slot {
+  flex: 0 0 var(--tilt-carousel-card, 74%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: center;
+}
+
+.tilt-carousel-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #141417;
+  box-shadow: 0 22px 48px -24px rgba(0, 0, 0, 0.7);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.tilt-carousel-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.tilt-carousel-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(7, 7, 9, 0.78) 0%, rgba(7, 7, 9, 0.12) 42%, transparent 70%);
+  pointer-events: none;
+}
+
+.tilt-carousel-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 22px;
+  color: #fafafa;
+}
+
+.tilt-carousel-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.tilt-carousel-subtitle {
+  font-size: 13px;
+  color: rgba(250, 250, 250, 0.72);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-carousel-scroller {
+    scroll-behavior: auto;
+  }
+
+  .tilt-carousel-frame {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

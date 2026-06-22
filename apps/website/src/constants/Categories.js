@@ -89,7 +89,11 @@ export const CATEGORIES = [
       'Scroll Zoom',
       'Reading Highlight',
       'Scroll Rotate',
-      'Scroll Snap'
+      'Scroll Snap',
+      'Scale Carousel',
+      'Arc Carousel',
+      'Focus Carousel',
+      'Tilt Carousel'
     ]
   },
   {
