@@ -49,7 +49,11 @@ export const CATEGORIES = [
       'Speed Dial',
       'Reaction Bar',
       'Split Pane',
-      'Stage Tracker'
+      'Stage Tracker',
+      'Gooey Menu',
+      'Password Strength',
+      'Ripple Button',
+      'Bottom Sheet'
     ]
   },
   {
@@ -73,7 +77,8 @@ export const CATEGORIES = [
       'Scroll Progress',
       'Parallax Scroll',
       'Scroll Spy Nav',
-      'Sticky Grid Scroll'
+      'Sticky Grid Scroll',
+      'Path Draw'
     ]
   },
   {
@@ -94,7 +99,8 @@ export const CATEGORIES = [
       'Starfield',
       'Plasma',
       'Grain',
-      'Flow Field'
+      'Flow Field',
+      'Mesh Gradient'
     ]
   }
 ];

@@ -496,5 +496,41 @@ export const componentMetadata = {
     category: 'Scroll',
     name: 'StickyGridScroll',
     tags: ['scroll', 'grid', 'sticky', 'reveal', 'stagger', 'parallax', 'motion']
+  },
+  'Components/GooeyMenu': {
+    description: 'A floating speed-dial button whose plus trigger expands into a fan of circular actions that separate and merge like liquid metaballs via a shared gooey blur filter and springy motion stagger.',
+    category: 'Components',
+    name: 'GooeyMenu',
+    tags: ['speed-dial', 'fab', 'gooey', 'metaball', 'menu', 'motion']
+  },
+  'Components/PasswordStrength': {
+    description: 'A password field with a reveal toggle, an animated red-to-green segmented strength meter, and a live criteria checklist that springs each rule as it is satisfied.',
+    category: 'Components',
+    name: 'PasswordStrength',
+    tags: ['password', 'input', 'strength-meter', 'validation', 'form', 'accessible']
+  },
+  'Components/RippleButton': {
+    description: 'A flat-filled pill button that emits Material-style ripples from the exact pointer-down point, with concurrent self-cleaning ripples and a reduced-motion flash fallback.',
+    category: 'Components',
+    name: 'RippleButton',
+    tags: ['button', 'ripple', 'material', 'motion', 'interaction', 'accessible']
+  },
+  'Scroll/PathDraw': {
+    description: 'A self-contained scroll panel whose vector path strokes itself from start to end as you scroll, with an optional marker dot riding the drawn frontier and selectable wave, spiral, and route presets.',
+    category: 'Scroll',
+    name: 'PathDraw',
+    tags: ['scroll', 'svg', 'path', 'motion', 'draw', 'sticky']
+  },
+  'Backgrounds/MeshGradient': {
+    description: 'An animated mesh-gradient backdrop where several large soft color blobs orbit on smooth elliptical paths under a gentle blur, blending into a living, morphing mesh on a single canvas.',
+    category: 'Backgrounds',
+    name: 'MeshGradient',
+    tags: ['background', 'mesh-gradient', 'canvas', 'gradient', 'ambient', 'animated']
+  },
+  'Components/BottomSheet': {
+    description: 'A draggable mobile-style bottom sheet that springs up inside its own contained stage with a fading scrim, snap points, and velocity-aware drag-to-dismiss.',
+    category: 'Components',
+    name: 'BottomSheet',
+    tags: ['bottom-sheet', 'drag', 'snap-points', 'dialog', 'motion', 'gesture']
   }
 };

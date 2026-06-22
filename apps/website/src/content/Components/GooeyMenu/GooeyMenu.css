@@ -1,0 +1,75 @@
+.gooey-menu {
+  --gooey-accent: #3ecf8e;
+  --gooey-trigger-size: 56px;
+  --gooey-action-size: 44px;
+  position: relative;
+  display: inline-flex;
+}
+
+.gooey-menu__defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.gooey-menu__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--gooey-trigger-size);
+  height: var(--gooey-trigger-size);
+}
+
+.gooey-menu__trigger {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--gooey-trigger-size);
+  height: var(--gooey-trigger-size);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gooey-accent);
+  color: #0a0a0a;
+  cursor: pointer;
+}
+
+.gooey-menu__trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #000, 0 0 0 4px var(--gooey-accent);
+}
+
+.gooey-menu__trigger-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gooey-menu__action {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--gooey-action-size);
+  height: var(--gooey-action-size);
+  margin-top: calc(var(--gooey-action-size) / -2);
+  margin-left: calc(var(--gooey-action-size) / -2);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gooey-accent);
+  color: #0a0a0a;
+  cursor: pointer;
+}
+
+.gooey-menu__action:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #000, 0 0 0 4px var(--gooey-accent);
+}

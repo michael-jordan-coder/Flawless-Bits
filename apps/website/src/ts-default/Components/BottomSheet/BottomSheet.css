@@ -1,0 +1,138 @@
+.bottom-sheet-stage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #131318;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  font-family: inherit;
+  color: #f4f4f5;
+}
+
+.bottom-sheet-trigger-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-sheet-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: #1f1f27;
+  color: #f4f4f5;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 0.12s ease-out, border-color 0.12s ease-out;
+}
+
+.bottom-sheet-trigger:hover {
+  background: #26262f;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.bottom-sheet-trigger:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.bottom-sheet-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(8, 8, 11, 0.62);
+  cursor: pointer;
+}
+
+.bottom-sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a21;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.45);
+  touch-action: none;
+  will-change: transform;
+  outline: none;
+}
+
+.bottom-sheet-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.7rem 0 0.4rem;
+  border: none;
+  background: transparent;
+  cursor: grab;
+}
+
+.bottom-sheet-handle:active {
+  cursor: grabbing;
+}
+
+.bottom-sheet-handle:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: -4px;
+  border-radius: 12px;
+}
+
+.bottom-sheet-handle-bar {
+  width: 38px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.bottom-sheet-header {
+  padding: 0.2rem 1.25rem 0.6rem;
+}
+
+.bottom-sheet-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.bottom-sheet-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.4rem 1.25rem 1.25rem;
+}
+
+.bottom-sheet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bottom-sheet-list li {
+  padding: 0.7rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #d4d4d8;
+  transition: background 0.12s ease-out;
+}
+
+.bottom-sheet-list li:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
