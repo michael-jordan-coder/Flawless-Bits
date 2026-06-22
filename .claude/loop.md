@@ -154,7 +154,8 @@ If you truly cannot find a fresh high-quality spell on designspells.com, fall ba
 1. `https://60fps.design` — buttery-smooth micro-interactions and motion studies (great for Scroll/motion components)
 2. `https://www.shapeof.ai` — world-class AI product UI interactions
 3. `https://reactbits.dev` — component interactions and animation patterns
-4. `https://mobbin.com` — real-world UI/UX flows from top-tier apps
+4. `https://animations.dev` — motion craft reference (easing, spring, choreography) for building to a high bar
+5. `https://mobbin.com` — real-world UI/UX flows from top-tier apps
 
 Record the source URL clearly.
 
