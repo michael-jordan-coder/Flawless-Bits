@@ -1,20 +1,20 @@
-.card-deck {
-  --card-deck-bg-from: #16131c;
-  --card-deck-bg-to: #050507;
-  --card-deck-surface: #1a1622;
-  --card-deck-ink: #f4f1ea;
-  --card-deck-ink-soft: rgba(244, 241, 234, 0.62);
-  --card-deck-ink-dim: rgba(244, 241, 234, 0.32);
-  --card-deck-accent: #ff4d2e;
-  --card-deck-card-w: 320px;
-  --card-deck-card-h: 420px;
+.tinder-slides {
+  --tinder-slides-bg-from: #16131c;
+  --tinder-slides-bg-to: #050507;
+  --tinder-slides-surface: #1a1622;
+  --tinder-slides-ink: #f4f1ea;
+  --tinder-slides-ink-soft: rgba(244, 241, 234, 0.62);
+  --tinder-slides-ink-dim: rgba(244, 241, 234, 0.32);
+  --tinder-slides-accent: #ff4d2e;
+  --tinder-slides-card-w: 320px;
+  --tinder-slides-card-h: 420px;
 
   position: relative;
   width: 100%;
   overflow: hidden;
   isolation: isolate;
-  background: linear-gradient(180deg, var(--card-deck-bg-from) 0%, var(--card-deck-bg-to) 100%);
-  color: var(--card-deck-ink);
+  background: linear-gradient(180deg, var(--tinder-slides-bg-from) 0%, var(--tinder-slides-bg-to) 100%);
+  color: var(--tinder-slides-ink);
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
@@ -22,11 +22,11 @@
   outline: none;
 }
 
-.card-deck:focus-visible {
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--card-deck-accent) 60%, transparent);
+.tinder-slides:focus-visible {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tinder-slides-accent) 60%, transparent);
 }
 
-.card-deck-vignette {
+.tinder-slides-vignette {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -34,7 +34,7 @@
   background: radial-gradient(70% 60% at 50% 42%, transparent 0%, transparent 46%, rgba(5, 5, 7, 0.55) 84%, rgba(5, 5, 7, 0.9) 100%);
 }
 
-.card-deck-stage {
+.tinder-slides-stage {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -44,20 +44,20 @@
   cursor: grab;
 }
 
-.card-deck.is-dragging .card-deck-stage {
+.tinder-slides.is-dragging .tinder-slides-stage {
   cursor: grabbing;
 }
 
-.card-deck-scene {
+.tinder-slides-scene {
   position: relative;
-  width: var(--card-deck-card-w);
-  height: var(--card-deck-card-h);
+  width: var(--tinder-slides-card-w);
+  height: var(--tinder-slides-card-h);
   transform-style: preserve-3d;
   perspective: 1400px;
   perspective-origin: 50% 46%;
 }
 
-.card-deck-card {
+.tinder-slides-card {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
@@ -65,26 +65,26 @@
   backface-visibility: hidden;
 }
 
-.card-deck-card-inner {
+.tinder-slides-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 14px;
   overflow: hidden;
-  background: var(--card-deck-surface);
+  background: var(--tinder-slides-surface);
   box-shadow:
     0 30px 60px -18px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(244, 241, 234, 0.06);
 }
 
-.card-deck-card[aria-hidden='false'] .card-deck-card-inner {
+.tinder-slides-card[aria-hidden='false'] .tinder-slides-card-inner {
   box-shadow:
     0 40px 80px -24px rgba(0, 0, 0, 0.8),
-    0 0 0 1px color-mix(in srgb, var(--card-deck-accent) 36%, transparent),
-    0 0 56px -16px color-mix(in srgb, var(--card-deck-accent) 42%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--tinder-slides-accent) 36%, transparent),
+    0 0 56px -16px color-mix(in srgb, var(--tinder-slides-accent) 42%, transparent);
 }
 
-.card-deck-card-img {
+.tinder-slides-card-img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -93,13 +93,13 @@
   pointer-events: none;
 }
 
-.card-deck-card-scrim {
+.tinder-slides-card-scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, transparent 38%, rgba(5, 5, 7, 0.82) 100%);
 }
 
-.card-deck-card-body {
+.tinder-slides-card-body {
   position: absolute;
   left: 22px;
   right: 22px;
@@ -109,23 +109,23 @@
   gap: 4px;
 }
 
-.card-deck-card-title {
+.tinder-slides-card-title {
   margin: 0;
   font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  color: var(--card-deck-ink);
+  color: var(--tinder-slides-ink);
 }
 
-.card-deck-card-meta {
+.tinder-slides-card-meta {
   margin: 0;
   font-size: 13px;
   font-weight: 500;
-  color: var(--card-deck-ink-soft);
+  color: var(--tinder-slides-ink-soft);
 }
 
-.card-deck-live {
+.tinder-slides-live {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -135,7 +135,7 @@
   white-space: nowrap;
 }
 
-.card-deck-hud {
+.tinder-slides-hud {
   position: absolute;
   left: 0;
   right: 0;
@@ -149,7 +149,7 @@
   pointer-events: none;
 }
 
-.card-deck-counter {
+.tinder-slides-counter {
   display: flex;
   align-items: baseline;
   gap: 4px;
@@ -158,41 +158,41 @@
   line-height: 1;
 }
 
-.card-deck-counter-num {
+.tinder-slides-counter-num {
   font-size: 34px;
   font-weight: 600;
-  color: var(--card-deck-ink);
+  color: var(--tinder-slides-ink);
 }
 
-.card-deck-counter-sep {
+.tinder-slides-counter-sep {
   font-size: 22px;
   font-weight: 500;
-  color: var(--card-deck-ink-dim);
+  color: var(--tinder-slides-ink-dim);
 }
 
-.card-deck-counter-total {
+.tinder-slides-counter-total {
   font-size: 22px;
   font-weight: 500;
-  color: var(--card-deck-ink-soft);
+  color: var(--tinder-slides-ink-soft);
 }
 
-.card-deck-hint {
+.tinder-slides-hint {
   margin: 0;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.01em;
-  color: var(--card-deck-ink-dim);
+  color: var(--tinder-slides-ink-dim);
 }
 
 @media (max-width: 45rem) {
-  .card-deck {
-    --card-deck-card-w: 240px;
-    --card-deck-card-h: 320px;
+  .tinder-slides {
+    --tinder-slides-card-w: 240px;
+    --tinder-slides-card-h: 320px;
   }
-  .card-deck-hud {
+  .tinder-slides-hud {
     padding: 18px 18px 20px;
   }
-  .card-deck-counter-num {
+  .tinder-slides-counter-num {
     font-size: 28px;
   }
 }
