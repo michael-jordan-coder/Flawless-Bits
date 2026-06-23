@@ -925,9 +925,11 @@ a {
   border-radius: 10px;
   font-size: 15px;
   font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
   border: 1px solid var(--border-primary);
   background: var(--bg-card);
-  color: #fff;
+  color: var(--primary);
   transition:
     background-color 0.2s ease,
     transform 0.1s ease;
@@ -944,8 +946,21 @@ a {
 }
 
 .cb-hero-btn-primary:hover {
-  background: #fff;
-  border-color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.cb-hero-signin {
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.cb-hero-signin-label {
+  color: var(--text-muted);
+  font-size: 14px;
 }
 
 /* Footer */
