@@ -102,7 +102,14 @@ const components = {
   'file-drop': () => import('../demo/Components/FileDropDemo'),
   'image-compare': () => import('../demo/Components/ImageCompareDemo'),
   'split-text': () => import('../demo/TextAnimations/SplitTextDemo'),
-  'blur-text': () => import('../demo/TextAnimations/BlurTextDemo')
+  'blur-text': () => import('../demo/TextAnimations/BlurTextDemo'),
+  'scale-carousel': () => import('../demo/Scroll/ScaleCarouselDemo'),
+  'arc-carousel': () => import('../demo/Scroll/ArcCarouselDemo'),
+  'focus-carousel': () => import('../demo/Scroll/FocusCarouselDemo'),
+  'tilt-carousel': () => import('../demo/Scroll/TiltCarouselDemo'),
+  'liquid-chrome': () => import('../demo/Backgrounds/LiquidChromeDemo'),
+  'liquid-glass': () => import('../demo/Backgrounds/LiquidGlassDemo'),
+  'iridescence': () => import('../demo/Backgrounds/IridescenceDemo')
 };
 
 export const componentMap = {

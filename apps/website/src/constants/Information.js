@@ -652,5 +652,54 @@ export const componentMetadata = {
     category: 'TextAnimations',
     name: 'BlurText',
     tags: ['text', 'blur', 'focus', 'in-view', 'reveal']
+  },
+  'Scroll/ScaleCarousel': {
+    description:
+      'A native scroll-snap swipe carousel with a coverflow-style scale feel — the centred card sits at full scale while neighbours shrink and dim, scroll-linked to each card\'s distance from the centre.',
+    category: 'Scroll',
+    name: 'ScaleCarousel',
+    tags: ['scroll', 'carousel', 'coverflow', 'swipe', 'snap', 'scale']
+  },
+  'Scroll/ArcCarousel': {
+    description:
+      'A native scroll-snap swipe carousel with an arc feel — the centred card peaks while neighbours sink and fan-rotate outward, scroll-linked to each card\'s distance from the centre.',
+    category: 'Scroll',
+    name: 'ArcCarousel',
+    tags: ['scroll', 'carousel', 'arc', 'swipe', 'snap', 'fan']
+  },
+  'Scroll/FocusCarousel': {
+    description:
+      'A native scroll-snap swipe carousel with a rack-focus feel — the centred card stays razor-sharp while neighbours blur, desaturate and dim, scroll-linked to each card\'s distance from the centre.',
+    category: 'Scroll',
+    name: 'FocusCarousel',
+    tags: ['scroll', 'carousel', 'focus', 'blur', 'swipe', 'snap']
+  },
+  'Scroll/TiltCarousel': {
+    description:
+      'A native scroll-snap swipe carousel with a lightweight coverflow tilt — neighbours angle back in perspective and shrink as they leave the centre, scroll-linked to each card\'s distance from the centre.',
+    category: 'Scroll',
+    name: 'TiltCarousel',
+    tags: ['scroll', 'carousel', 'coverflow', 'tilt', 'perspective', 'swipe']
+  },
+  'Backgrounds/LiquidChrome': {
+    description:
+      'A full-bleed WebGL shader of liquid chrome — drifting metaballs shaded with a reconstructed studio environment (mirror reflections, fresnel, key specular, ACES tone map), with one blob tracking the pointer. Reduced-motion-safe.',
+    category: 'Backgrounds',
+    name: 'LiquidChrome',
+    tags: ['background', 'webgl', 'shader', 'chrome', 'metal', 'interactive']
+  },
+  'Backgrounds/LiquidGlass': {
+    description:
+      'A full-bleed WebGL shader of liquid glass — drifting metaballs rendered as refractive, dispersive glass over LiquidChrome\'s reconstructed studio environment, refraction blended with reflection by fresnel. One blob tracks the pointer. Reduced-motion-safe.',
+    category: 'Backgrounds',
+    name: 'LiquidGlass',
+    tags: ['background', 'webgl', 'shader', 'glass', 'refraction', 'interactive']
+  },
+  'Backgrounds/Iridescence': {
+    description:
+      'A full-bleed WebGL shader of iridescent metal — LiquidChrome\'s studio-lit metaballs coated in a view-angle thin-film palette so the chrome shifts hue like oil on water. One blob tracks the pointer. Reduced-motion-safe.',
+    category: 'Backgrounds',
+    name: 'Iridescence',
+    tags: ['background', 'webgl', 'shader', 'iridescent', 'metal', 'interactive']
   }
 };

@@ -89,7 +89,11 @@ export const CATEGORIES = [
       'Scroll Zoom',
       'Reading Highlight',
       'Scroll Rotate',
-      'Scroll Snap'
+      'Scroll Snap',
+      'Scale Carousel',
+      'Arc Carousel',
+      'Focus Carousel',
+      'Tilt Carousel'
     ]
   },
   {
@@ -118,7 +122,10 @@ export const CATEGORIES = [
       'Hex Pulse',
       'Noise Contours',
       'Rain',
-      'Vortex'
+      'Vortex',
+      'Liquid Chrome',
+      'Liquid Glass',
+      'Iridescence'
     ]
   }
 ];
