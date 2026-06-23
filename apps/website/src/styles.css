@@ -2,7 +2,7 @@
 
 :root {
   --primary: #fafafa;
-  --accent: #d4d4d4;
+  --accent: #4d4dff;
   --bg-body: #0a0a0a;
   --bg-card: #171717;
   --bg-elevated: #171717;
@@ -24,7 +24,7 @@
   --chrome-topbar-bg: #161616;
   --chrome-toggle-bg: rgba(255, 255, 255, 0.06);
   --chrome-toggle-border: rgba(255, 255, 255, 0.08);
-  --chrome-toggle-active: #6e6e6e;
+  --chrome-toggle-active: var(--accent);
   --chrome-iconbtn-bg: rgba(249, 250, 251, 0.05);
   --chrome-preview-bg: #1c1c1c;
 }
@@ -1509,6 +1509,12 @@ body.mobile-sheet-open {
   align-items: center;
   justify-content: space-between;
   padding: 8px 6px 8px 14px;
+}
+
+/* Brand mark carries the chrome accent (Logo uses currentColor). */
+.app-container--chrome .sidebar-brand-logo {
+  display: inline-flex;
+  color: var(--accent);
 }
 
 /* Search styled as a list-item pill. */
