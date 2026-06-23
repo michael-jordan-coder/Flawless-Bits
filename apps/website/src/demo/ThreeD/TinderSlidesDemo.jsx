@@ -3,8 +3,8 @@ import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
 
-import CardDeck from '../../content/ThreeD/CardDeck/CardDeck';
-import { cardDeck } from '../../constants/code/ThreeD/cardDeckCode';
+import TinderSlides from '../../content/ThreeD/TinderSlides/TinderSlides';
+import { tinderSlides } from '../../constants/code/ThreeD/tinderSlidesCode';
 
 const SAMPLE_ITEMS = [
   { id: 'c01', image: 'https://picsum.photos/seed/aurora/640/840', title: 'Aurora Drift', meta: 'Drama · 6 episodes' },
@@ -28,12 +28,12 @@ const DEFAULT_PROPS = {
   showHint: true
 };
 
-const CardDeckDemo = () => {
+const TinderSlidesDemo = () => {
   const propData = useMemo(
     () => [
       {
         name: 'items',
-        type: 'CardDeckItem[]',
+        type: 'TinderSlidesItem[]',
         default: '[]',
         description: 'Cards to stack in the deck. Each item needs `id` and `title`; `image` and `meta` are optional.'
       },
@@ -57,11 +57,11 @@ const CardDeckDemo = () => {
       defaultProps={DEFAULT_PROPS}
       propData={propData}
       dependencies={[]}
-      codeObject={cardDeck}
-      componentName="CardDeck"
+      codeObject={tinderSlides}
+      componentName="TinderSlides"
       flexProps={{ alignItems: 'stretch', minH: '560px' }}
       preview={({ props, key }) => (
-        <CardDeck key={key} {...props} items={SAMPLE_ITEMS} accentColor="var(--accent)" />
+        <TinderSlides key={key} {...props} items={SAMPLE_ITEMS} accentColor="var(--accent)" />
       )}
       controls={({ props, updateProp, forceRerender }) => {
         const set = (name, val) => {
@@ -142,4 +142,4 @@ const CardDeckDemo = () => {
   );
 };
 
-export default CardDeckDemo;
+export default TinderSlidesDemo;

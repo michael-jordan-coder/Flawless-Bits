@@ -356,11 +356,11 @@ export const componentMetadata = {
     name: 'CoverFlow',
     tags: ['3d', 'carousel', 'coverflow', 'drag', 'perspective']
   },
-  'ThreeD/CardDeck': {
-    description: 'A depth-stacked card deck where the front card swipes away and the rest rise forward through Z-space, with drag and keyboard control.',
+  'ThreeD/TinderSlides': {
+    description: 'A Tinder-style swipe deck where the front card throws away and the rest rise forward through Z-space, with drag and keyboard control.',
     category: 'ThreeD',
-    name: 'CardDeck',
-    tags: ['3d', 'cards', 'deck', 'swipe', 'stack']
+    name: 'TinderSlides',
+    tags: ['3d', 'cards', 'tinder', 'swipe', 'stack']
   },
   'ThreeD/CubeShowcase': {
     description: 'A rotating 3D cube that cycles through content faces, draggable to spin freely and snapping to the nearest face.',

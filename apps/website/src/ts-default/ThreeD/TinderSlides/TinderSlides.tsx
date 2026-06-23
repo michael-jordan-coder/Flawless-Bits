@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
+import './TinderSlides.css';
 
-export interface CardDeckItem {
+export interface TinderSlidesItem {
   id: string | number;
   image?: string;
   title: string;
   meta?: string;
 }
 
-export interface CardDeckProps {
-  items?: CardDeckItem[];
+export interface TinderSlidesProps {
+  items?: TinderSlidesItem[];
   visibleCards?: number;
   depth?: number;
   offsetY?: number;
@@ -23,23 +24,11 @@ export interface CardDeckProps {
   style?: CSSProperties;
 }
 
-const DEFAULT_ITEMS: CardDeckItem[] = [];
+const DEFAULT_ITEMS: TinderSlidesItem[] = [];
 
 const EASE = 0.1;
 const THROW_FADE = 1; // slot value at which a thrown card is fully gone
 const DRAG_THROW_DEG = 14; // rotateZ at full drag travel
-
-const STYLE_BLOCK = `
-.card-deck-tw:focus-visible {
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--card-deck-accent, #ff4d2e) 60%, transparent);
-}
-.card-deck-tw-card[aria-hidden='false'] .card-deck-tw-inner {
-  box-shadow:
-    0 40px 80px -24px rgba(0, 0, 0, 0.8),
-    0 0 0 1px color-mix(in srgb, var(--card-deck-accent, #ff4d2e) 36%, transparent),
-    0 0 56px -16px color-mix(in srgb, var(--card-deck-accent, #ff4d2e) 42%, transparent);
-}
-`;
 
 function clamp(v: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, v));
@@ -49,7 +38,7 @@ function pad2(n: number): string {
   return n < 10 ? `0${n}` : `${n}`;
 }
 
-export default function CardDeck({
+export default function TinderSlides({
   items = DEFAULT_ITEMS,
   visibleCards = 4,
   depth = 60,
@@ -63,11 +52,12 @@ export default function CardDeck({
   height = 520,
   className = '',
   style
-}: CardDeckProps) {
+}: TinderSlidesProps) {
   const safeItems = items;
   const N = safeItems.length;
 
   const sectionRef = useRef<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   const valueRef = useRef(0);
@@ -298,80 +288,50 @@ export default function CardDeck({
 
   const rootStyle: CSSProperties = {
     height: typeof height === 'number' ? `${height}px` : height,
-    background: 'linear-gradient(180deg, #16131c 0%, #050507 100%)',
-    ...(accentColor ? ({ '--card-deck-accent': accentColor } as CSSProperties) : null),
+    ...(accentColor ? ({ '--tinder-slides-accent': accentColor } as CSSProperties) : null),
     ...style
   };
 
+  const rootClass = ['tinder-slides', className].filter(Boolean).join(' ');
   const frontItem = N > 0 ? safeItems[front] : null;
 
   return (
     <section
       ref={sectionRef}
-      className={`card-deck-tw relative w-full overflow-hidden isolate select-none touch-none text-[#f4f1ea] outline-none ${className}`}
+      className={rootClass}
       style={rootStyle}
       role="group"
-      aria-roledescription="card deck"
-      aria-label="Card deck"
+      aria-roledescription="tinder slides"
+      aria-label="Tinder slides"
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      <style>{STYLE_BLOCK}</style>
+      <div className="tinder-slides-vignette" aria-hidden="true" />
 
-      <div
-        className="pointer-events-none absolute inset-0 z-[1]"
-        style={{
-          background:
-            'radial-gradient(70% 60% at 50% 42%, transparent 0%, transparent 46%, rgba(5,5,7,0.55) 84%, rgba(5,5,7,0.9) 100%)'
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="absolute inset-0 z-[2] flex items-center justify-center cursor-grab [.is-dragging_&]:cursor-grabbing">
-        <div
-          className="relative w-80 h-[420px] max-[45rem]:w-60 max-[45rem]:h-80"
-          style={{ transformStyle: 'preserve-3d', perspective: '1400px', perspectiveOrigin: '50% 46%' }}
-        >
+      <div className="tinder-slides-stage" ref={stageRef}>
+        <div className="tinder-slides-scene">
           {safeItems.map((item, i) => (
             <article
               key={item.id}
               ref={node => {
                 cardRefs.current[i] = node;
               }}
-              className="card-deck-tw-card absolute inset-0 will-change-transform backface-hidden"
-              style={{ transformStyle: 'preserve-3d' }}
+              className="tinder-slides-card"
             >
-              <div
-                className="card-deck-tw-inner relative w-full h-full overflow-hidden bg-[#1a1622]"
-                style={{
-                  borderRadius: '14px',
-                  boxShadow: '0 30px 60px -18px rgba(0,0,0,0.7), 0 0 0 1px rgba(244,241,234,0.06)'
-                }}
-              >
+              <div className="tinder-slides-card-inner">
                 {item.image && (
                   <img
-                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    className="tinder-slides-card-img"
                     src={item.image}
                     alt={item.title || ''}
                     loading="eager"
                     draggable={false}
                   />
                 )}
-                <div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(180deg, transparent 38%, rgba(5,5,7,0.82) 100%)' }}
-                  aria-hidden="true"
-                />
-                <div className="absolute left-[22px] right-[22px] bottom-5 flex flex-col gap-1">
-                  <h3
-                    className="m-0 text-[22px] font-semibold leading-[1.15] text-[#f4f1ea]"
-                    style={{ letterSpacing: '-0.02em' }}
-                  >
-                    {item.title}
-                  </h3>
-                  {item.meta && (
-                    <p className="m-0 text-[13px] font-medium text-[rgba(244,241,234,0.62)]">{item.meta}</p>
-                  )}
+                <div className="tinder-slides-card-scrim" aria-hidden="true" />
+                <div className="tinder-slides-card-body">
+                  <h3 className="tinder-slides-card-title">{item.title}</h3>
+                  {item.meta && <p className="tinder-slides-card-meta">{item.meta}</p>}
                 </div>
               </div>
             </article>
@@ -379,26 +339,17 @@ export default function CardDeck({
         </div>
       </div>
 
-      <div
-        className="absolute w-px h-px overflow-hidden whitespace-nowrap"
-        style={{ clip: 'rect(0 0 0 0)', clipPath: 'inset(50%)' }}
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      <div className="tinder-slides-live" aria-live="polite" aria-atomic="true">
         {frontItem?.title}
       </div>
 
-      <footer className="absolute left-0 right-0 bottom-0 z-[3] px-7 pt-[22px] pb-6 flex items-end justify-between gap-6 pointer-events-none max-[45rem]:px-[18px] max-[45rem]:pb-5">
-        <div className="flex items-baseline gap-1 tabular-nums leading-none" style={{ letterSpacing: '-0.03em' }}>
-          <span className="text-[34px] font-semibold text-[#f4f1ea] max-[45rem]:text-[28px]">{pad2(front + 1)}</span>
-          <span className="text-[22px] font-medium text-[rgba(244,241,234,0.32)]">/</span>
-          <span className="text-[22px] font-medium text-[rgba(244,241,234,0.62)]">{pad2(N)}</span>
+      <footer className="tinder-slides-hud">
+        <div className="tinder-slides-counter">
+          <span className="tinder-slides-counter-num">{pad2(front + 1)}</span>
+          <span className="tinder-slides-counter-sep">/</span>
+          <span className="tinder-slides-counter-total">{pad2(N)}</span>
         </div>
-        {showHint && hint && (
-          <p className="m-0 text-[11px] font-medium text-[rgba(244,241,234,0.32)]" style={{ letterSpacing: '0.01em' }}>
-            {hint}
-          </p>
-        )}
+        {showHint && hint && <p className="tinder-slides-hint">{hint}</p>}
       </footer>
     </section>
   );

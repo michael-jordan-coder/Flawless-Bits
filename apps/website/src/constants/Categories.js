@@ -65,7 +65,7 @@ export const CATEGORIES = [
     subcategories: ['Poster Drum',
       'Poster Helix',
       'Cover Flow',
-      'Card Deck',
+      'Tinder slides',
       'Cube Showcase',
       'Tag Sphere',
       'Depth Tunnel'
