@@ -9,11 +9,9 @@ export const getLanguage = key => {
   return languages[key];
 };
 
-export const decodeLabel = label =>
-  label
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+const capitalizeWords = str => str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1));
+
+export const decodeLabel = label => capitalizeWords(label).join(' ');
 
 export const forceChakraDarkTheme = () => {
   localStorage.setItem('chakra-ui-color-mode', 'dark');
@@ -21,8 +19,4 @@ export const forceChakraDarkTheme = () => {
 
 export const slug = str => str.replace(/\s+/g, '-').toLowerCase();
 
-export const toPascal = str =>
-  str
-    .split('-')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join('');
+export const toPascal = str => capitalizeWords(str).join('');
