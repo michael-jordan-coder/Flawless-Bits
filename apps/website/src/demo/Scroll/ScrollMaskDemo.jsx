@@ -19,6 +19,14 @@ const DIRECTION_OPTIONS = [
   { value: 'right', label: 'Right' }
 ];
 
+const ACCENTS = [
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
+
 const ScrollMaskDemo = () => {
   const propData = useMemo(
     () => [
@@ -66,6 +74,7 @@ const ScrollMaskDemo = () => {
               valueUnit="px"
               onChange={val => set('height', val)}
             />
+            <PreviewSelect title="Accent" options={ACCENTS} value={props.accent} onChange={val => set('accent', val)} />
           </>
         );
       }}

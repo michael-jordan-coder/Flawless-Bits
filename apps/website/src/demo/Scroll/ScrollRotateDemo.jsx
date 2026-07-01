@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ScrollRotate from '../../content/Scroll/ScrollRotate/ScrollRotate';
 import { scrollRotate } from '../../constants/code/Scroll/scrollRotateCode';
@@ -10,6 +11,14 @@ const DEFAULT_PROPS = {
   segments: 24,
   accent: '#3ecf8e'
 };
+
+const ACCENTS = [
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
 
 const ScrollRotateDemo = () => {
   const propData = useMemo(
@@ -55,6 +64,7 @@ const ScrollRotateDemo = () => {
               value={props.segments}
               onChange={val => set('segments', val)}
             />
+            <PreviewSelect title="Accent" options={ACCENTS} value={props.accent} onChange={val => set('accent', val)} />
           </>
         );
       }}

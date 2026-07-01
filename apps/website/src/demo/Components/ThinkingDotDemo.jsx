@@ -25,6 +25,14 @@ const TEXT_OPTIONS = [
   { value: 'Preparing answer', label: 'Preparing answer' },
 ];
 
+const ACCENTS = [
+  { value: '#a1a1aa', label: 'Zinc' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#38bdf8', label: 'Sky' },
+  { value: '#f43f5e', label: 'Rose' },
+];
+
 const ThinkingDotDemo = () => {
   const propData = useMemo(
     () => [
@@ -45,7 +53,7 @@ const ThinkingDotDemo = () => {
       codeObject={thinkingDot}
       componentName="ThinkingDot"
       preview={({ props, key }) => <ThinkingDot key={key} {...props} />}
-      controls={({ props, updateProp }) => (
+      controls={({ props, updateProp, forceRerender }) => (
         <>
           <PreviewSelect
             title="Text"
@@ -58,6 +66,12 @@ const ThinkingDotDemo = () => {
             options={SIZE_OPTIONS}
             value={props.size}
             onChange={v => updateProp('size', v)}
+          />
+          <PreviewSelect
+            title="Accent"
+            options={ACCENTS}
+            value={props.dotColor}
+            onChange={v => { updateProp('dotColor', v); updateProp('textColor', v); forceRerender(); }}
           />
         </>
       )}

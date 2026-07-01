@@ -2,9 +2,18 @@ import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import NotificationStack from '../../content/Components/NotificationStack/NotificationStack';
 import { notificationStack } from '../../constants/code/Components/notificationStackCode';
+
+const ACCENTS = [
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
 
 const SAMPLE_NOTIFICATIONS = [
   { id: 'n1', title: 'New comment', body: 'Maya replied to your thread.' },
@@ -77,6 +86,7 @@ const NotificationStackDemo = () => {
               value={props.count}
               onChange={v => set('count', v)}
             />
+            <PreviewSelect title="Accent" options={ACCENTS} value={props.accent} onChange={v => set('accent', v)} />
           </>
         );
       }}

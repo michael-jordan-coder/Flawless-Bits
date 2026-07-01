@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ScrollZoom from '../../content/Scroll/ScrollZoom/ScrollZoom';
 import { scrollZoom } from '../../constants/code/Scroll/scrollZoomCode';
@@ -10,6 +11,14 @@ const DEFAULT_PROPS = {
   from: 0.6,
   accent: '#3ecf8e'
 };
+
+const ACCENTS = [
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
 
 const ScrollZoomDemo = () => {
   const propData = useMemo(
@@ -54,6 +63,7 @@ const ScrollZoomDemo = () => {
               valueUnit="px"
               onChange={val => set('height', val)}
             />
+            <PreviewSelect title="Accent" options={ACCENTS} value={props.accent} onChange={val => set('accent', val)} />
           </>
         );
       }}

@@ -26,6 +26,14 @@ const TOOLS_PRESETS = {
   file: ['Opening attachment', 'Parsing content', 'Preparing answer'],
 };
 
+const ACCENTS = [
+  { value: '#a1a1aa', label: 'Zinc' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#38bdf8', label: 'Sky' },
+  { value: '#f43f5e', label: 'Rose' },
+];
+
 const ThinkingToolsDemo = () => {
   const propData = useMemo(
     () => [
@@ -67,6 +75,12 @@ const ThinkingToolsDemo = () => {
               value={props.interval}
               valueUnit="ms"
               onChange={v => set('interval', v)}
+            />
+            <PreviewSelect
+              title="Accent"
+              options={ACCENTS}
+              value={props.dotColor}
+              onChange={v => { updateProp('dotColor', v); updateProp('textColor', v); forceRerender(); }}
             />
           </>
         );

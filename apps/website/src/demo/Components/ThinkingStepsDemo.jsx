@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ThinkingSteps from '../../content/Components/ThinkingSteps/ThinkingSteps';
 import { thinkingSteps } from '../../constants/code/Components/thinkingStepsCode';
@@ -12,6 +13,14 @@ const DEFAULT_PROPS = {
   textColor: '#a1a1aa',
   stepColor: '#71717a',
 };
+
+const ACCENTS = [
+  { value: '#a1a1aa', label: 'Zinc' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#38bdf8', label: 'Sky' },
+  { value: '#f43f5e', label: 'Rose' },
+];
 
 const ThinkingStepsDemo = () => {
   const propData = useMemo(
@@ -38,6 +47,12 @@ const ThinkingStepsDemo = () => {
         const set = (name, val) => { updateProp(name, val); forceRerender(); };
         return (
           <>
+            <PreviewSelect
+              title="Accent"
+              options={ACCENTS}
+              value={props.dotColor}
+              onChange={v => { updateProp('dotColor', v); updateProp('textColor', v); forceRerender(); }}
+            />
             <PreviewSlider
               title="Interval"
               min={600}

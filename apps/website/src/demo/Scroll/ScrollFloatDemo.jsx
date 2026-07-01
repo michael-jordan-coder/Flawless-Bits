@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ScrollFloat from '../../content/Scroll/ScrollFloat/ScrollFloat';
 import { scrollFloat } from '../../constants/code/Scroll/scrollFloatCode';
@@ -10,6 +11,14 @@ const DEFAULT_PROPS = {
   height: 460,
   accent: '#3ecf8e'
 };
+
+const ACCENTS = [
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
 
 const ScrollFloatDemo = () => {
   const propData = useMemo(
@@ -48,6 +57,7 @@ const ScrollFloatDemo = () => {
               valueUnit="px"
               onChange={val => set('height', val)}
             />
+            <PreviewSelect title="Accent" options={ACCENTS} value={props.accent} onChange={v => set('accent', v)} />
           </>
         );
       }}
